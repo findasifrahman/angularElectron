@@ -1,0 +1,10 @@
+<h1 mat-dialog-title style="text-align: center;color:#20B2AA;margin:20ox;margin-top: 50px;">Edit Mesh State</h1>
+<div class="row" style="text-align: center;margin:20ox;justify-content: center;color:#DC143C;">
+
+    <mat-checkbox [(ngModel)]="state" class="example-margin">Statrt/Stop Mesh State</mat-checkbox>
+
+</div>
+<div class="row" style="text-align: center;justify-content: center;">
+  <button mat-button style="background-color: #E9967A;width:80px;margin-right: 20px;margin-top: 100px" (click)="onNoClick()">Cancel</button>
+  <button mat-button style="background-color: #8FBC8F;width:80px;margin-right: 20px;margin-top: 100px"  cdkFocusInitial (click)="editmeshset()">Ok</button>
+</div>

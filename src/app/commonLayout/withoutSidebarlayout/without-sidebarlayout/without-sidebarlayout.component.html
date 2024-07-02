@@ -1,0 +1,120 @@
+<div class="row no-gutter ">
+  <!-- Sidebar -->
+    <mat-sidenav-container fullscreen style="background-color: black;">
+      <mat-sidenav mode="side" #sidenav opened position="start" id="sidebar"
+      [opened]="screenWidth > 640" [mode]="(screenWidth > 640) ? 'side' : 'over'" style="background-color: black;">
+    
+        <header style="padding-bottom: 20px;padding-top: 10px;">
+            <a href="#" style="font-size: 18px;" style="margin-left: 0 !important;padding-left:0 !important;">{{Administrator}}</a>
+            <span style="margin-left: 0 !important;padding-left:0 !important;">
+              <mat-card class="example-card" style="margin-left: 0 !important;padding-left:0 !important;">
+                <mat-card-header style="margin-left: 0 !important;padding-left:0 !important;">
+                  <img mat-card-sm-image style="margin-left: 0 !important;padding-left:0 !important;" src='/assets/logo2.png'>
+
+                </mat-card-header>
+              </mat-card>  
+            </span>
+        </header>
+          <li class="nav">
+            <a class="nav-link" style="display: inline-flex;" [routerLink]='["/viewlocation"]'><i><mat-icon aria-hidden="false">home</mat-icon></i>Home</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/changepass"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">vpn_key</mat-icon></i> Password</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/changespeedlimit"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">speed</mat-icon></i> Speed Limit</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/fuelReport"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">block</mat-icon></i> Fuel Report</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/tripreport"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">trip_origin</mat-icon></i> Trip Report</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/alartreport"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">alarm</mat-icon></i> Alarm Report</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/overspeedreport"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">shutter_speed</mat-icon></i> OverSpeed Report</a>
+          </li>
+          <li class="nav">
+            <a [routerLink]='["/locationreport"]' class="nav-link" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">shutter_speed</mat-icon></i> Location Report</a>
+          </li>
+          <li class="nav">
+            <a class="nav-link" [routerLink]='["/logout"]' style="display: inline-flex;" ><i><mat-icon aria-hidden="false">input</mat-icon></i>Logout</a>
+          </li> 
+          
+  </mat-sidenav>
+
+
+  <mat-sidenav-content style="background-color: '#ffffff'" >
+      <div class="d-flex flex-row-reverse" >
+        <div class="p-1" style="font-size: small;color:rgba(2, 2, 2, 0.9);margin-top: 8px;">{{Administrator}}</div>
+        <div class="p-1" style="margin-left: 30px;margin-right: 10px;">
+          <mat-icon aria-hidden="false" style="font-size:xx-large;color: rgba(8, 8, 8, 0.8);" aria-label="Example home icon">directions_car</mat-icon>
+        </div>
+        <div class="p-0">
+          <!-- Actual search box -->
+          <div class="input-group border-0">
+            <div class="input-group-prepend border-0">
+              <span class="input-group-text border-0" style="background:transparent;" id="basic-addon1">@</span>
+            </div>
+            <input type="text" class="form-control border-0" placeholder="Search">
+          </div>
+        </div>
+        <div class="p-2" style="margin-top: 5px;margin-right: 25px; cursor: pointer;">
+          <mat-icon [matBadge]="matmailcount" matBadgeColor="warn" color="accent" (click)="clickMailList()" >
+            mail
+          </mat-icon>
+          <div style="position:absolute; z-index:1000;margin-left: 10px;margin-top: -10px;" *ngIf="showMailList">
+            <mat-list  style="height: 430px;width: 330px;background-color: rgba(64, 64, 64, 0.9);" >
+              <mat-list-item *ngFor="let c of usermailobj; index as i"> 
+                <mat-card style="width: 330px;background-color: rgba(184, 184, 184, 0.9);">
+                  <mat-card-header>
+                    <mat-card-title style="color: white;font-size: small;text-align: left;justify-content: left;">{{c.head}}</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p style="color: black;font-size: smaller;padding-left: 30px;">{{c.message}}</p>
+                  </mat-card-content>  
+
+                </mat-card>
+              </mat-list-item>
+              
+            </mat-list>
+          </div>
+        </div>
+
+        <div class="p-2" style="margin-top: 5px;margin-right: 25px; cursor: pointer;">
+          <mat-icon [matBadge]="matbadgecount" matBadgeColor="warn" color="primary" (click)="showAlarmList()">
+            notifications
+          </mat-icon>
+          <div style="position:absolute; z-index:1000;margin-left: 10px;margin-top: -10px;" *ngIf="showNotiiList">
+            <mat-list  style="height: 450px;width: 360px;background-color: rgba(8, 8, 8, 0.9);" >
+              <mat-list-item *ngFor="let c of alarmListToday; index as i"> 
+                <mat-card style="width: 450px;background-color: rgba(8, 8, 8, 0.9);">
+                  <mat-card-header>
+                    <mat-card-subtitle style="color: white;font-size: small;text-align: left;justify-content: left;">{{c.deviceName}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p style="color: yellowgreen;font-size: smaller;padding-left: 30px">{{c.alerm}} at {{c.sattime}}</p>
+                  </mat-card-content>  
+
+                </mat-card>
+              </mat-list-item>
+              
+            </mat-list>
+          </div>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+
+
+      <div style="margin-left: 40px;">
+        <app-footer></app-footer>
+      </div>
+  
+  </mat-sidenav-content>
+</mat-sidenav-container >
+</div>
+
+<ngx-spinner></ngx-spinner>

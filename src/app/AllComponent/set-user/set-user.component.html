@@ -1,0 +1,76 @@
+
+<mat-toolbar style="background-color: cornflowerblue;">
+
+  <span style="color: cornsilk;">Bijoy-50</span>
+  <span class="example-spacer"></span>
+  <button (click)="gotoHome()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon style="color: cornsilk;">home</mat-icon>
+  </button>
+
+</mat-toolbar>
+<div class="col-md-12 col-xl-6 chat">
+    <div class="card2">
+        <div class="card-header msg_head">
+            <div class="d-flex bd-highlight">
+            <div class="img_cont">
+            </div>
+
+            <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+            <div class="action_menu">
+            <ul>
+                <li (click)="gotoSettings()"><i class="fas fa-user-circle"></i> Home</li>
+                <li><i class="fas fa-users"></i> Add to close friends</li>
+                <li><i class="fas fa-plus"></i> Add to group</li>
+                <li><i class="fas fa-ban"></i> Block</li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="d-flex justify-content-center h-100 w-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Set Device Details</h3>
+          <div class="d-flex justify-content-end social_icon">
+
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="Forms">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="username" formControlName="username">
+              
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" value="Add" (click)="FormSubmit()"  [disabled]="!Forms.valid" class="btn float-right login_btn">
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Developed By<a href="#">Intricate Lab</a>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a href="#">Bijoy@50</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ngx-spinner></ngx-spinner>

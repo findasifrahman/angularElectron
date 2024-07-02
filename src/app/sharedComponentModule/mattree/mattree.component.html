@@ -1,0 +1,21 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="background-color:grey;height: 100%;width: 200px">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" style="background-color: black;color:yellow"  >
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      <span class="btnhover2"  (click)="productsclick(node.id)"  >{{node.productname}}</span>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding style="color:whitesmoke">
+      <button mat-icon-button matTreeNodeToggle class="btnhover"
+              [attr.aria-label]="'toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror" >
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <a style="color: whitesmoke"><span (click)="groupByList(node.id);" >{{node.groupname}} </span></a>
+
+    </mat-tree-node>
+
+</mat-tree>
+

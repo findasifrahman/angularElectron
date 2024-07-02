@@ -1,0 +1,149 @@
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .sidenav-container {
+      flex: 1;
+      background:'#000000';
+      .sidenav {
+        padding: 12px;
+        width: 220px;
+        background: '#ffffff';
+      }
+      .main-container {
+        padding: 16px;
+      }
+    }
+  }
+  
+  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+  .no-gutters {
+      margin-right: 0;
+      margin-left: 0; }
+      .no-gutters > .col,
+      .no-gutters > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0; }
+  
+  #viewport {
+    padding-left: 200px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  
+  #sidebar {
+  //z-index: 1000;
+    position: fixed;
+    left: 200px;
+    width: 210px;
+    height: 100%;
+    margin-left: -200px;
+    //overflow-y: auto;
+    background: #000000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+  }
+  #sidebar header {
+    background-color: #000000;
+    font-size: 20px;
+    line-height: 52px;
+    //text-align: ;
+    padding-left: 40px;
+  }
+  #sidebar header a {
+    color: #fff;
+    display: block;
+    text-decoration: none;
+  }
+  
+  #sidebar header a:hover {
+    color: yellow;
+  }
+  #sidebar .nav{
+    background: none;
+    border-bottom: 1px solid #455A64;
+    font-size: 14px;
+  
+  
+  }
+  
+  #sidebar .nav a{
+    color: #CFD8DC;
+    font-size: 14px;
+    text-align: right;
+  
+  }
+  
+  #sidebar .nav a:hover{
+    background: none;
+    color: #ECEFF1;
+  }
+  
+  #sidebar .nav a i{
+    margin-right: 16px;
+  }
+  
+  
+  /* Style the sidenav links and the dropdown button */
+  .dropdown-btn {
+    padding: 2px 2px 2px 2px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  
+  .mat-card {
+      color: #fff;
+      margin-bottom: 0 !important;
+      padding-bottom: 10 !important;
+      margin-top: 0 !important;
+      padding-top: 10 !important;
+      .mat-card-header {
+        width: 100%;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .mat-card-title {
+        font-size: 30px !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .mat-card-subtitle {
+        color: #fff;
+        white-space: nowrap;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+  }
+  
+
+  .example-header-image {
+      background-image: url("../../../../assets/logo1.png");
+      background-size: cover;
+  }
+  .example-card {
+    max-width: 300px;
+    background-color: #000;
+  }

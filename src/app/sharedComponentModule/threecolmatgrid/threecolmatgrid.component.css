@@ -1,0 +1,21 @@
+.descStyle{
+    background-color:white;text-align:justify;font-size: small;
+}
+.btnStyle{
+    width:70px;height:70px;background-color:Highlight;
+}
+.titleStyle{
+    font-family:Roboto, sans-serif;font-weight:normal;font-size:large
+}
+
+@media screen and (max-width: 959px) {
+  .titleStyle{
+    font-family:Roboto, sans-serif;font-weight:normal;font-size:large
+  }
+}
+/* small size viewport */
+@media screen and (max-width: 859px) {
+  .titleStyle{
+    font-family:Roboto, sans-serif;font-weight:normal;font-size:medium
+}
+}

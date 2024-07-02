@@ -1,0 +1,114 @@
+<mat-toolbar style="background-color: cornflowerblue;">
+
+  <span style="color: cornsilk;">Bijoy-50</span>
+  <span class="example-spacer"></span>
+  <button (click)="gotoMap()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon style="color: cornsilk;">map</mat-icon>
+  </button>
+  <button (click)="gotoSettings()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon style="color: cornsilk;">settings</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container-fluid h-50">
+  <div class="row justify-content-center h-100">
+    <div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
+      <div class="card-header">
+        <div class="input-group">
+          <input type="text" placeholder="Search..." name="" class="form-control search">
+          <div class="input-group-prepend">
+            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body contacts_body">
+            <ul class="contacts">
+              <li class="active" *ngFor="let c of userlist; index as i">
+                <div class="d-flex bd-highlight">
+                  <div class="img_cont">
+                    <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
+                    <span class="online_icon"></span>
+                  </div>
+                  <div class="user_info">
+                    <span>{{c.name}} ({{c.node_id}})</span>
+                    <p>{{c.time}}: {{c.status}}</p>
+                  </div>
+                </div>
+              </li>
+
+    
+          </ul>
+      </div>
+      <div class="card-footer"></div>
+    </div></div>
+    <div class="col-md-8 col-xl-6 chat">
+      <div class="card">
+        <div class="card-header msg_head">
+          <div class="d-flex bd-highlight">
+            <div class="img_cont">
+              <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
+              <span class="online_icon"></span>
+            </div>
+            <div class="user_info">
+              <span>User: {{username}} ({{device_id}})</span>
+              <p>Broadcast Messages ({{connecString}})</p>
+            </div>
+            <div class="video_cam">
+              <span><i class="fas fa-video"></i></span>
+              <span><i class="fas fa-phone"></i></span>
+            </div>
+          </div>
+          <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+          <div class="action_menu">
+            <ul>
+              <li (click)="gotoSettings()"><i class="fas fa-user-circle"></i> Settings</li>
+              <li (click)="gotoMap()"><i class="fas fa-users"></i> Map</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card-body msg_card_body" id="someVar"  #someVar>
+          <div *ngFor="let c of arrlist; index as i">
+              <div class="d-flex justify-content-start mb-4" *ngIf="c.left">
+                <div class="img_cont_msg">
+                  <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                </div>
+                <div class="msg_cotainer">
+                  {{c.text}} <br/>
+                  <span class="msg_time">{{c.time}}</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end mb-4" *ngIf="c.right">
+                <div class="msg_cotainer_send">
+                  {{c.text}}  <br/>
+                  <span class="msg_time_send">{{c.time}} 
+                    <mat-icon style="color: cornsilk;font-size: 10px; color:crimson" *ngIf="c.sent">done</mat-icon>
+                    <mat-icon style="color: cornsilk;font-size: 10px; color:crimson" *ngIf="c.received">done</mat-icon>
+                  </span>
+                </div>
+                <div class="img_cont_msg">
+              <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                </div>
+              </div>
+          </div>
+
+        </div>
+
+      <!--  end of chat -->
+        <div class="card-footer">
+          <div class="input-group">
+            <div class="input-group-append">
+              <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+            </div>
+            <textarea [(ngModel)]="inputText" name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+            <div class="input-group-append">
+              <span class="input-group-text send_btn" (click)="FormSubmit()"><i class="fas fa-location-arrow"></i></span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

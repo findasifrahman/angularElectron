@@ -1,0 +1,296 @@
+<div [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006994' : '#006994' }">
+    <div fxLayout="row" fxLayoutGap="10px"  style="padding-left: 20px;margin-left:25px;margin-top: 30px;margin-bottom: 20px;">
+      <div fxFlex="30">
+        <mat-card  style="text-align: center;justify-content: center;background-color: #006994;color:white">
+          <mat-card-title style="color:yellow">
+            {{this.set_channel_id}}
+          </mat-card-title  >
+          <mat-card_subtitle>
+            Current Channel No
+          </mat-card_subtitle>
+        </mat-card>
+      </div>
+      <div fxFlex="30">
+        <mat-card style="text-align: center;justify-content: center;background-color: #006994;color:white">
+          <mat-card-title  style="color:yellow">
+            {{set_channel_freq_type}}
+          </mat-card-title>
+          <mat-card_subtitle>
+            Frequency Type
+          </mat-card_subtitle>
+        </mat-card>
+      </div>
+      <div fxFlex="30">
+        <mat-card style="text-align: center;justify-content: center;background-color: #006994;color:white"> 
+          <mat-card-title style="color:yellow">
+            {{set_channel_type}}
+          </mat-card-title>
+          <mat-card_subtitle>
+            A/D
+          </mat-card_subtitle>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="card" 
+     style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;padding-top: 20px;margin-left: 20px;margin-right: 20px;margin-bottom: 30px;padding-left: 25px;padding-right: 20px;;padding-top: 20px;padding-left: 25px;padding-right: 20px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006994' : '#006994' }">
+      <div class="card-body" style="text-align: center;color: #006994;font-size: x-large;">
+        Voice Channel settings
+      </div>
+
+      <h4 style="text-align: center;padding-top:20px;">Digital</h4>
+      <div fxLayout="row" class="mat-elavation-z4" style="padding-left: 20px;;margin-top: 30px;" fxLayoutGap="10px">
+
+          <div fxFlex="22" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+              <h5 style="text-align: center;padding-top:20px;"></h5>
+              <div fxLayout="row" style="padding-bottom:20px;">
+                
+                <div fxFlex="50" style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(1)">M-1</button>
+                </div>
+                <div fxFlex="50" style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(2)">M-2</button>
+                </div>
+              </div>
+          </div>
+          <div fxFlex="40" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+          
+            <div fxLayout="row" style="padding-bottom:20px;">
+                <div fxFlex="25" style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(3)">C-3</button>
+                </div>
+                <div fxFlex="25" style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(4)">C-4</button>
+                </div>
+                <div fxFlex="25"  style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(5)">C-5</button>
+                </div>
+                
+                <div fxFlex="25" style="text-align: center;justify-content: center;">
+                  <button mat-fab color="primary" (click)="channelChangeSubmit(6)">U-6</button>
+                </div>
+            </div>
+          </div>
+          <div fxFlex="22" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+            <div fxLayout="row" style="padding-bottom:20px;">
+              <div fxFlex="50" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(7)">7E</button>
+        
+              </div>
+              <div fxFlex="50" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(8)">8E</button>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="15" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+            <div fxLayout="row" style="padding-bottom:20px;">
+              <div fxFlex="100"  style="text-align: center;justify-content: center;">
+                <button mat-fab color="warn" style="background-color: seagreen;" (click)="channelChangeSubmit(9)">C-9</button>
+              </div>
+            </div>
+            <h5 style="text-align: center;padding-top:20px;">BN-CG</h5>
+          </div>
+
+    
+      </div>
+
+      <!-- analog channel -->
+        <h4 style="text-align: center;padding-top:20px;">Analog</h4>
+        <div fxLayout="row" class="mat-elavation-z4"  fxLayoutGap="10px" style="padding-left:20px;margin-top: 25px;">
+          
+          <div fxFlex="15" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+            
+            <div fxLayout="row" style="padding-bottom:20px;">
+          
+              <div fxFlex="100" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(10)">M-10</button>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div fxFlex="20" style="border-radius: 5px;border-width: 1px;border-color: red;border-style:solid;">
+     
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+            <div fxLayout="row" style="padding-bottom:20px;">
+          
+              <div fxFlex="50" style="text-align: center;justify-content: center;">
+                <button mat-fab color="warn"  (click)="channelChangeSubmit(11)">11</button>
+              </div>
+              <div fxFlex="50" style="text-align: center;justify-content: center;">
+                <button mat-fab color="warn" (click)="channelChangeSubmit(12)">12</button>
+              </div>
+
+            </div>
+            <h5 style="text-align: center;padding-top:20px;">ICOM-ID</h5>
+            <!--
+            <div fxLayout="row" style="margin-left:20px">
+          
+              <div fxFlex="50">
+                <h5 style="color: RED;">TAC-12</h5>
+              </div>
+              <div fxFlex="50">
+                <h5 style="color: RED;">TAC-13</h5>
+              </div>
+
+            </div>
+          -->
+          </div>
+
+          <div fxFlex="15" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"></h5>
+            
+            <div fxLayout="row" style="padding-bottom:20px;">
+          
+              <div fxFlex="100" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(13)">M-13</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div fxFlex="35" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+            <h5 style="text-align: center;padding-top:20px;"> </h5>
+            <div fxLayout="row" style="padding-bottom:20px;">
+              <div fxFlex="25" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(14)">C-14</button>
+              </div>
+              <div fxFlex="25" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(15)">C-15</button>
+              </div>
+              <div fxFlex="25" style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(16)">C-16</button>
+              </div>
+              <div fxFlex="25"style="text-align: center;justify-content: center;">
+                <button mat-fab color="primary" (click)="channelChangeSubmit(17)">U-17</button>
+              </div>
+          </div>
+        </div>
+        <div fxFlex="15" style="border-radius: 5px;border-width: 1px;border-style:solid;">
+          <h5 style="text-align: center;padding-top:20px;"></h5>
+          
+          <div fxLayout="row" style="padding-bottom:20px;">
+        
+            <div fxFlex="100" style="text-align: center;justify-content: center;">
+              <button mat-fab color="warn" style="background-color: seagreen;" (click)="channelChangeSubmit(18)">C-18</button>
+            </div>
+
+          </div>
+          <h5 style="text-align: center;padding-top:20px;">BN-CG</h5>
+        </div>
+      </div>
+      <!-- sq settings-->
+      <br/>
+  <!--
+          <h4 style="text-align: center;padding-top:20px;">SQ Settings for Analog ch</h4>
+          <div fxLayout="row" class="mat-elavation-z4" style="padding-left: 20px;;margin-top: 30px;margin-bottom: 20px;" fxLayoutGap="10px">
+            <div fxFlex="100" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+              <div fxLayout="row" style="padding-top: 20px;padding-bottom:20px;margin-left:20px">
+                <div fxFlex="20">
+                  <button mat-fab color="primary" (click)="changesq(1)">1</button>
+                </div>
+                <div fxFlex="20">
+                  <button mat-fab color="primary" (click)="changesq(2)">2</button>
+                </div>
+                <div fxFlex="20">
+                  <button mat-fab color="primary" (click)="changesq(3)">3</button>
+                </div>
+                <div fxFlex="20">
+                  <button mat-fab color="primary" (click)="changesq(4)">4</button>
+                </div>
+                <div fxFlex="20">
+                  <button mat-fab color="primary" (click)="changesq(5)">5</button>
+                </div>
+              </div>
+            </div>
+          </div>
+-->
+      <!-- Mic gain settings-->
+      <h4 style="text-align: center;padding-top:20px;">Microphone Gain</h4>
+      <div fxLayout="row" class="mat-elavation-z4" style="padding-left: 20px;;margin-top: 30px;margin-bottom: 20px;" fxLayoutGap="10px">
+        <div fxFlex="100" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+          <div fxLayout="row" style="padding-top: 20px;padding-bottom:20px;margin-left:20px">
+            <div fxFlex="20">
+              <button mat-fab color="primary" (click)="changemc(1)">1</button>
+            </div>
+            <div fxFlex="20">
+              <button mat-fab color="primary" (click)="changemc(2)">2</button>
+            </div>
+            <div fxFlex="20">
+              <button mat-fab color="primary" (click)="changemc(3)">3</button>
+            </div>
+            <div fxFlex="20">
+              <button mat-fab color="primary" (click)="changemc(4)">4</button>
+            </div>
+            <div fxFlex="20">
+              <button mat-fab color="primary" (click)="changemc(5)">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--MIc gain end-->
+    </div>
+
+
+
+
+    <div class="card" style="margin-top: 20px;margin-left: 45px;background-color: #006994;margin-right: 20px;">
+      <div class="card-body" style="text-align: center;color:blanchedalmond;font-size: x-large;">
+        Editable Channel List
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 20px;margin-left: 45px;margin-right: 20px;">
+      <div class="col-md-12">
+        <mat-table [dataSource]="AllElement" multiTemplateDataRows class="mat-elevation-z8">
+          <!-- Position Column -->
+          <ng-container matColumnDef="channel_id">
+            <mat-header-cell *matHeaderCellDef> Channel Id </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.channel_id}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.type}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="buttons">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let AllElement" (click)="$event.stopPropagation()">
+              <button mat-button color="#ffffff" (click)="onEdit(AllElement.channel_id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <!--
+              <button mat-button color="#ffffff" (click)="onUpdate(AllElement.id)">
+                <mat-icon>update</mat-icon>
+              </button>
+              -->
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row style="background-color: #006994;" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+      </div>
+    </div>
+
+    <br />
+    <!--
+    <div class="row" style="margin-top: 50px;">
+      <div fxFlex="85" >
+        </div>
+      <div fxFlex="10" >
+        <button mat-fab color="primary" style="background-color: black;" (click)="advancedSet()">A</button>
+      </div>
+    </div>
+    -->
+</div>
+<ngx-spinner></ngx-spinner>

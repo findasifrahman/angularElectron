@@ -1,0 +1,15 @@
+<div class="input-group">
+  <div class="mx-2">
+    <button mat-raised-button color="accent" (click)="fileInput.click()" [disabled]="!ImageDisable">{{filenameinput}}</button>
+    <input hidden type="file" ng2FileSelect [uploader]="uploader" #fileInput>
+  </div>
+  <div class="mx-2">
+    <button mat-mini-fab color="warn" (click)="uploader.uploadAll()"><mat-icon>file_copy</mat-icon> </button>
+  </div>
+  <div class="mx-2">
+    <mat-label [style.color]="textcolorImage">{{ImageText}}</mat-label>
+  </div>
+  <div [hidden]="!removeImageButton">
+    <button mat-raised-button color="warn" (click)="fileInputRemove()">Remove File</button>
+  </div>
+</div>

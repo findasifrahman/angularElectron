@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div class="d-flex justify-content-center h-100 w-100">
+    <div class="card">
+      <div class="card-header">
+        <h3>Edit User</h3>
+      </div>
+  
+
+
+      <form class="example-container" [formGroup]="Forms">
+          <mat-form-field floatLabel="options.value.floatLabel">
+              <mat-label>User Name</mat-label>
+              <input matInput placeholder="User Name" type="Text"  formControlName="username" >
+          </mat-form-field>
+          <mat-form-field floatLabel="options.value.floatLabel">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" type="password" formControlName="password" >
+          </mat-form-field>
+          <!--
+          <mat-form-field>
+              <mat-label>Role</mat-label>
+              <select matNativeControl formControlName="roleId" name="roleId" required>
+
+                <option *ngFor="let car of roles" [value]="car.id">
+                  {{car.rolename}}
+                </option>
+              </select>
+
+              <mat-hint>Role</mat-hint>
+          </mat-form-field>
+          
+          <mat-form-field floatLabel="options.value.floatLabel">
+            <mat-label>Unique Id</mat-label>
+            <input matInput placeholder="text" type="text" formControlName="uniqueid" >
+          </mat-form-field>
+          !---->
+          <br/>
+          <div class="input-group btn-group">
+            <button type="submit" (click)="FormSubmit()" class="form-control btn" style="height:40px;width:425px;background-color:black;color:whitesmoke" [disabled]="!Forms.valid">Submit</button>
+          </div>
+
+      </form>
+
+      <br /><br />
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>

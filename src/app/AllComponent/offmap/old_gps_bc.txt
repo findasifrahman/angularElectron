@@ -1,0 +1,751 @@
+import { Component,NgZone,ElementRef,Renderer2, ViewChild, 
+  OnInit, AfterViewInit } from '@angular/core';
+import { IpcRenderer } from 'electron';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmationDialogComponent } from '../../sharedComponentModule/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import * as L from 'leaflet';
+import * as moment from 'moment';
+
+@Component({
+  selector: 'app-offmap',
+  templateUrl: './offmap.component.html',
+  styleUrls: ['./offmap.component.scss']
+})
+export class OffmapComponent implements AfterViewInit {
+  private map
+  private ipc: IpcRenderer;
+  pos_arr:any = []
+  rcvrlist = []
+  markers: any = {}
+  backcol ="p"
+  rcv_my_id_enc_data_shipl
+  own_gps_data
+  status_msg_map
+  my_id
+  myinterval
+
+  
+
+  pointList_0001 = []
+  pointList_0002 = []
+  pointList_0003 = []
+  pointList_0004 = []
+  pointList_0005 = []
+  pointList_0006 = []
+  my_id_gps_list = []
+  //my_id_gps = []
+  layerGroup;// = L.layerGroup().addTo(this.map);
+
+  /////////////long msg var
+  accept_dialog_alradyopen
+  accept_dialogRef 
+
+  ack_perm_for_long_msg_star_handshake
+  long_data_all_str_rcvd 
+  constructor(zone:NgZone,private snackBar: MatSnackBar,
+    public dialog: MatDialog, private router: Router )  {
+      this.rcv_my_id_enc_data_shipl = (event, data) => {
+        zone.run(()=>{
+          this.pos_arr.push({id:data.msg.my_id_obj.uid, self: true})
+          this.rcvrlist = data.msg.shipl
+          this.rcvrlist  = this.rcvrlist.map(x=> ({...x,status:'Offline',state: false}))
+          data.msg.shipl.map(mapval=>{
+            this.pos_arr.push({id: mapval.uid, self: false})
+          })
+          this.my_id = data.msg.my_id_obj.uid
+          /////////////////////////////////create poly with prev data
+          if(this.layerGroup)
+            this.layerGroup.clearLayers()
+          console.log("total val all gps", data.msg.all_gps)
+          //this.markers["0002"].clearLayers()
+          //this.markers["0001"].clearLayers()
+          let uid_0001_gps = []
+          let uid_0002_gps = []
+          let uid_0003_gps = []
+          let uid_0004_gps = []
+          let uid_0005_gps = []
+          let uid_0006_gps = []
+          let my_id_gps = []
+          this.my_id_gps_list = []
+          this.pointList_0001 = []
+          this.pointList_0002 = []
+          this.pointList_0003 = []
+          this.pointList_0004 = []
+          this.pointList_0005 = []
+          this.pointList_0006 = []
+          data.msg.all_gps.map((mapval,index)=>{
+            if(moment(mapval.mtime).isValid){
+              mapval.mtime = moment(mapval.mtime)
+              if(this.my_id == mapval.uid){
+                const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                if(isLat && isLon)
+                  my_id_gps.push(mapval)
+              }
+              else{
+                  if(mapval.uid == "0001"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon){           
+                      if(uid_0001_gps.length > 2){
+                        let findist = this.distance(uid_0001_gps[uid_0001_gps.length -1].lat,
+                          uid_0001_gps[uid_0001_gps.length -1].long,
+                          mapval.lat,mapval.long)
+                          var ms = moment(moment(mapval.mtime).
+                              format('YYYY-MM-DD HH:mm:ss')).
+                              diff(moment(uid_0001_gps[uid_0001_gps.length -1].mtime)) 
+                          var d = moment.duration(ms)
+                          console.log("calculating distance-", findist)
+                          console.log("time -", d.asMinutes())
+                          if(d.asMinutes() < 10){
+                            if(findist > 15){
+                              console.log("discard invalid gps value")
+                              console.log("discard invalid gps value")
+                            }
+                            else{
+                              uid_0001_gps.push(mapval)
+                            }
+                          }
+                          else{
+                            uid_0001_gps.push(mapval)
+                          }
+                          //let timedeff = if 
+                      }// end if
+                      else{
+                        uid_0001_gps.push(mapval)
+                      }
+                    }
+                  }else if(mapval.uid == "0002"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon)
+                      uid_0002_gps.push(mapval)
+                  }else if(mapval.uid == "0003"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon)
+                      uid_0003_gps.push(mapval)
+                  }else if(mapval.uid == "0004"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon)
+                      uid_0004_gps.push(mapval)
+                  }else if(mapval.uid == "0005"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon)
+                      uid_0005_gps.push(mapval)
+                  }else if(mapval.uid == "0006"){
+                    const isLat =  isFinite(mapval.lat) && Math.abs(mapval.lat) <= 90;
+                    const isLon =  isFinite(mapval.long) && Math.abs(mapval.long) <= 180;
+                    if(isLat && isLon)
+                      uid_0006_gps.push(mapval)
+                  }
+              }
+            }
+            const customOptions = {
+              'className': 'class-popup' // name custom popup
+            }
+            if(index >=data.msg.all_gps.length - 1){
+
+              setTimeout(function(){
+                if(my_id_gps.length > 1){
+                  console.log("inside my id polyline-",my_id_gps)
+                  my_id_gps.map((mp,index)=>{
+                    this.my_id_gps_list.push(new L.LatLng(mp.lat,mp.long))
+
+                    if(index >=  (my_id_gps.length - 1)){
+                      var firstpolyline = new L.Polyline(this.my_id_gps_list, {
+                        color: 'black',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo(  this.layerGroup)//this.map);
+                      var oranIcon = new L.Icon({
+                        iconUrl: 'assets/marker--orange.png',
+                        iconSize: [20, 35],
+                        iconAnchor: [10, 35],
+                        popupAnchor: [1, -34],
+                        shadowSize: [35, 35]
+                      });
+                        let mship = "self"
+                          
+                        
+                        //////////////////////////
+                        const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                        + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + mp.mtime.format("HH:mm") + '</h6>'
+                    
+                        this.markers[this.my_id] = new L.marker([mp.lat,mp.long],{icon:oranIcon})
+                        .bindTooltip(mship,{
+                          permanent: true,direction:'bottom',sticky:true,
+                          opacity: 0.8
+                        }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+  
+                        this.map.panTo(new L.LatLng(mp.lat,mp.long));
+
+                        
+                        //this.markers["0001"].previousLatLngs = [];
+                      
+                        //L.marker([mp.lat,mp.long]).addTo(this.layerGroup)//this.map);
+                    }
+                  })
+                }
+                if(uid_0001_gps.length > 0){
+                  console.log("inside first polyline-",uid_0001_gps)
+                  uid_0001_gps.map((mp,index)=>{
+                    this.pointList_0001.push(new L.LatLng(mp.lat,mp.long))
+                    
+                    if(index >= uid_0001_gps.length - 1){
+                      var firstpolyline = new L.Polyline(this.pointList_0001, {
+                        color: 'green',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo(  this.layerGroup)//this.map);
+                        let mname =  this.rcvrlist.find(x=>x.uid == 
+                          "0001")
+                        let mship = ""
+                        if(mname){
+                          mship = mname.ship
+                        }
+                        let findist =""
+                        if(my_id_gps.length > 0 ){
+                          findist = this.distance(my_id_gps[my_id_gps.length -1].lat,my_id_gps[my_id_gps.length -1].long,
+                            mp.lat,mp.long)
+    
+                        }
+                        const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                        + '<h6 style="color:brown;padding: 0 !important;margin:0 !important">' + findist  +' nm</h6>' 
+                        + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + uid_0001_gps[uid_0001_gps.length -1].mtime.format("HH:mm") + '</h6>'
+                    
+                        this.markers["0001"] = new L.marker([uid_0001_gps[uid_0001_gps.length -1].lat,uid_0001_gps[uid_0001_gps.length -1].long])//mp.lat,mp.long])
+                        .bindTooltip(mship,{
+                          permanent: true,direction:'bottom',sticky:true,
+                          opacity: 0.8
+                        }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+  
+                        this.map.panTo(new L.LatLng(mp.lat,mp.long));
+                        //this.markers["0001"].previousLatLngs = [];
+                      
+                        //L.marker([mp.lat,mp.long]).addTo(this.layerGroup)//this.map);
+                    }
+                  })
+
+                }
+                if(uid_0002_gps.length > 0){
+                  var pointList = [];
+                  console.log("inside second polyline-",uid_0002_gps)
+                  uid_0002_gps.map((mp,index)=>{
+                    this.pointList_0002.push(new L.LatLng(mp.lat,mp.long))
+                    
+                    if(index >= uid_0002_gps.length - 1){
+                      let findist =""
+                      if(my_id_gps.length > 0 ){
+                        findist = this.distance(my_id_gps[my_id_gps.length -1].lat,my_id_gps[my_id_gps.length -1].long,
+                          mp.lat,mp.long)
+  
+                      }
+                      
+                      var firstpolyline = new L.Polyline(this.pointList_0002, {
+                        color: 'red',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo( this.layerGroup)//this.map);
+                      let mname =  this.rcvrlist.find(x=>x.uid == 
+                        "0002")
+                      let mship = ""
+                      if(mname){
+                        mship = mname.ship
+                      }
+                      
+                      const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                      + '<h6 style="color:brown;padding: 0 !important;margin:0 !important">' + findist  +' nm</h6>' 
+                      + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + mp.mtime.format("HH:mm") + '</h6>'
+                  
+                      this.markers["0002"] = new L.marker([mp.lat,mp.long])
+                      .bindTooltip(mship,{
+                        permanent: true,direction:'bottom',sticky:true,
+                        opacity: 0.8
+                      }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+
+                      //this.map.panTo(new L.LatLng(mp.lat,mp.long));
+                      //this.markers["0002"].previousLatLngs = [];
+                      //L.marker([mp.lat,mp.long]).addTo(  this.layerGroup)//this.map);
+                    }
+                  })
+
+                }
+                if(uid_0003_gps.length > 0){
+                  console.log("inside third polyline-",uid_0003_gps)
+                  uid_0003_gps.map((mp,index)=>{
+                    this.pointList_0003.push(new L.LatLng(mp.lat,mp.long))
+                    
+                    if(index >= uid_0003_gps.length - 1){
+                      let findist =""
+                      if(my_id_gps.length > 0 ){
+                        findist = this.distance(my_id_gps[my_id_gps.length -1].lat,my_id_gps[my_id_gps.length -1].long,
+                          mp.lat,mp.long)
+  
+                      }
+                      
+                      var firstpolyline = new L.Polyline(this.pointList_0003, {
+                        color: 'orange',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo( this.layerGroup)//this.map);
+                      let mname =  this.rcvrlist.find(x=>x.uid == 
+                        "0003")
+                      let mship = ""
+                      if(mname){
+                        mship = mname.ship
+                      }
+                      
+                      const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                      + '<h6 style="color:brown;padding: 0 !important;margin:0 !important">' + findist  +' nm</h6>' 
+                      + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + mp.mtime.format("HH:mm") + '</h6>'
+                  
+                      this.markers["0003"] = new L.marker([mp.lat,mp.long])
+                      .bindTooltip(mship,{
+                        permanent: true,direction:'bottom',sticky:true,
+                        opacity: 0.8
+                      }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+
+                      //this.map.panTo(new L.LatLng(mp.lat,mp.long));
+                      //this.markers["0002"].previousLatLngs = [];
+                      //L.marker([mp.lat,mp.long]).addTo(  this.layerGroup)//this.map);
+                    }
+                  })
+
+                }
+                if(uid_0004_gps.length > 0){
+                  var pointList = [];
+                  console.log("inside fourth polyline-",uid_0004_gps)
+                  uid_0004_gps.map((mp,index)=>{
+                    this.pointList_0004.push(new L.LatLng(mp.lat,mp.long))
+                    
+                    if(index >= uid_0004_gps.length - 1){
+                      let findist =""
+                      if(my_id_gps.length > 0 ){
+                        findist = this.distance(my_id_gps[my_id_gps.length -1].lat,my_id_gps[my_id_gps.length -1].long,
+                          mp.lat,mp.long)
+  
+                      }
+                      
+                      var firstpolyline = new L.Polyline(this.pointList_0004, {
+                        color: 'blue',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo( this.layerGroup)//this.map);
+                      let mname =  this.rcvrlist.find(x=>x.uid == 
+                        "0004")
+                      let mship = ""
+                      if(mname){
+                        mship = mname.ship
+                      }
+                      
+                      const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                      + '<h6 style="color:brown;padding: 0 !important;margin:0 !important">' + findist  +' nm</h6>' 
+                      + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + mp.mtime.format("HH:mm") + '</h6>'
+                  
+                      this.markers["0004"] = new L.marker([mp.lat,mp.long])
+                      .bindTooltip(mship,{
+                        permanent: true,direction:'bottom',sticky:true,
+                        opacity: 0.8
+                      }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+
+                      this.map.panTo(new L.LatLng(mp.lat,mp.long));
+                      //this.markers["0002"].previousLatLngs = [];
+                      //L.marker([mp.lat,mp.long]).addTo(  this.layerGroup)//this.map);
+                    }
+                  })
+
+                }
+                if(uid_0005_gps.length > 0){
+                  console.log("inside five polyline-",uid_0005_gps)
+                  uid_0005_gps.map((mp,index)=>{
+                    this.pointList_0005.push(new L.LatLng(mp.lat,mp.long))
+                    
+                    if(index >= uid_0005_gps.length - 1){
+                      let findist =""
+                      if(my_id_gps.length > 0 ){
+                        findist = this.distance(my_id_gps[my_id_gps.length -1].lat,my_id_gps[my_id_gps.length -1].long,
+                          mp.lat,mp.long)
+  
+                      }
+                      
+                      var firstpolyline = new L.Polyline(this.pointList_0005, {
+                        color: 'black',
+                        weight: 3,
+                        opacity: 0.9,
+                        smoothFactor: 1
+                      });
+                      firstpolyline.addTo( this.layerGroup)//this.map);
+                      let mname =  this.rcvrlist.find(x=>x.uid == 
+                        "0005")
+                      let mship = ""
+                      if(mname){
+                        mship = mname.ship
+                      }
+                      
+                      const popupContent1 =  '<h6 style="color:black;padding: 0 !important;margin:0 !important">' + this.convertDMS(mp.lat,mp.long) + '</h6>'
+                      + '<h6 style="color:brown;padding: 0 !important;margin:0 !important">' + findist  +' nm </h6>' 
+                      + '<h6 style="color:red;padding: 0 !important;margin:0 !important">' + mp.mtime.format("HH:mm") + '</h6>'
+                  
+                      this.markers["0005"] = new L.marker([mp.lat,mp.long])
+                      .bindTooltip(mship,{
+                        permanent: true,direction:'bottom',sticky:true,
+                        opacity: 0.8
+                      }).bindPopup(popupContent1, customOptions).openPopup().addTo(this.layerGroup)//this.map);
+
+                      this.map.panTo(new L.LatLng(mp.lat,mp.long));
+                      //this.markers["0002"].previousLatLngs = [];
+                      //L.marker([mp.lat,mp.long]).addTo(  this.layerGroup)//this.map);
+                    }
+                  })
+
+                }
+              }.bind(this),2000)
+            }
+
+          })
+          ////////////////////////////////
+          /*data.msg.prestate.map(mapval=>{
+            let isrcvrvalid = this.rcvrlist.find(x=>x.uid == 
+              mapval.uid)
+            if(isrcvrvalid){
+                let no = {id: mapval.uid, lat: parseFloat(mapval.lat),
+                  long: parseFloat(mapval.long), time: mapval.time,
+                  name: this.rcvrlist.find(x=>x.uid == mapval.uid).ship}
+                
+                this.pos_arr.push(no)
+            
+
+                if(mapval.lat && mapval.lat !== 0){
+                  let mname =  this.rcvrlist.find(x=>x.uid == 
+                    mapval.uid)
+                  let mship = ""
+                  if(mname){
+                    mship = mname.ship
+                  }
+                  
+                  const popupContent1 =  '<h6>' + mapval.lat + ", " + mapval.long + '</h6>'
+                  + '<h6 style="color:red">' + mapval.time + '</h6>'
+              
+                  this.markers[mapval.id] = new L.marker([mapval.lat,mapval.long])
+                  .bindTooltip(no.name,{
+                    permanent: true,direction:'bottom',sticky:true
+                  }).bindPopup(popupContent1).openPopup().addTo(this.map);
+
+                  this.map.panTo(new L.LatLng(mapval.lat,mapval.long));
+                  this.markers[mapval.id].previousLatLngs = [];
+                }
+            }
+          })*/
+          //////////////////////////////////////
+         
+        })
+      }
+      //////////////////////////
+      this.own_gps_data = (event, data) => {
+        zone.run(()=>{
+          if(this.pos_arr.length > 0){
+            console.log("own gps-",data.msg)
+            let new_Arr = this.pos_arr.filter(x=> x.id !== data.msg.sender)
+            let no = {id: data.msg.sender, lat: parseFloat(data.msg.lat),
+               long: parseFloat(data.msg.long), time: data.msg.time,
+               name: data.msg.name}
+            new_Arr.push(no)
+            this.pos_arr = new_Arr
+            this.pos_arr.map(mapval=>{//
+              if(mapval.lat && mapval.lat !==0){
+                const popupContent = '<h6>' + mapval.lat + ", " + mapval.long + '</h6>'
+                + '<h6 style="color:red">' + mapval.time + '</h6>'
+                var oranIcon = new L.Icon({
+                  iconUrl: 'assets/marker--orange.png',
+                  iconSize: [25, 41],
+                  iconAnchor: [12, 41],
+                  popupAnchor: [1, -34],
+                  shadowSize: [41, 41]
+                });
+                if(this.markers.hasOwnProperty(mapval.id)){ //allready a marker
+                  this.markers[mapval.id].setLatLng([mapval.lat, mapval.long]);
+                  this.markers[mapval.id].bindPopup(popupContent).openPopup() ._icon.classList.add("huechange")
+                  this.map.panTo(new L.LatLng(mapval.lat,mapval.long));
+                }else{
+                  this.markers[mapval.id] = new L.marker([mapval.lat,mapval.long],{icon:oranIcon})
+                  .bindTooltip(mapval.name,{
+                    permanent: true,direction:'bottom'
+                  }).bindPopup(popupContent).openPopup()
+                  .addTo(this.map);
+              
+                  
+                   this.map.panTo(new L.LatLng(mapval.lat,mapval.long));
+                   this.markers[mapval.id].previousLatLngs = [];
+                }
+              }
+            })
+
+          }
+        })
+      }
+      //////////////////////////
+      this.status_msg_map = (event, data) => {// other gps data
+        zone.run(()=>{
+          // let obj ={raw_data:data.substr(0,10+len+2+len+8),start: data.substr(0,2), sender: data.substr(2,4),
+          //lat: data.substr(8,len), long: data.substr(8 + len + 2,len),
+          //time: parseInt(Number("0x" + data.substr(8+len+2+len,8)),10),
+          //end: data.substr(8+len+2+len+8,2)}
+          let isrcvrvalid = this.rcvrlist.find(x=>x.uid == data.msg.sender)
+          if(isrcvrvalid){
+              let new_Arr = this.pos_arr.filter(x=> x.id !== data.msg.sender)
+              let no = {id: data.msg.sender, lat: parseFloat(data.msg.lat),
+                long: parseFloat(data.msg.long), time: data.msg.time,
+                name: this.rcvrlist.find(x=>x.uid == data.msg.sender).ship}
+              new_Arr.push(no)
+              this.pos_arr = new_Arr
+              this.pos_arr.map(mapval=>{
+                if(mapval.id == no.id && mapval.lat && mapval.lat !== 0){
+                  const popupContent1 =  '<h6>' + mapval.lat + ", " + mapval.long + '</h6>'
+                  + '<h6 style="color:red">' + mapval.time + '</h6>'
+                  if(this.markers.hasOwnProperty(mapval.id)){ //allready a marker
+                    // Store the previous latlng
+                    // this.markers[mapval.id].previousLatLngs.push(this.markers[mapval.id].getLatLng());
+                    // Set new latlng on marker
+                    this.markers[mapval.id].setLatLng([mapval.lat, mapval.long]);
+                    this.markers[mapval.id].bindPopup(popupContent1).openPopup()
+                    this.map.panTo(new L.LatLng(mapval.lat,mapval.long));
+
+                    ///////////////////draw line
+                    if(no.id == "0001"){
+                      this.pointList_0001.push({lat:no.lat,lng: no.long})
+                      if(this.pointList_0001.length > 2){
+                        var firstpolyline = new L.Polyline( this.pointList_0001, {
+                          color: 'green',
+                          weight: 3,
+                          opacity: 0.9,
+                          smoothFactor: 1
+                        });
+                        firstpolyline.addTo(this.map);
+                      }
+                    }
+                    ////////////////////////////
+                  }else{
+                    this.markers[mapval.id] = new L.marker([mapval.lat,mapval.long])
+                    .bindTooltip(mapval.name,{
+                      permanent: true,direction:'bottom',sticky:true
+                    }).bindPopup(popupContent1).openPopup().addTo(this.map);
+
+                    this.map.panTo(new L.LatLng(mapval.lat,mapval.long));
+                    this.markers[mapval.id].previousLatLngs = [];
+                    ////////////////////////////////
+                    if(this.rcvrlist.length > 0){
+                      //console.log("dataa status front-", data,this.rcvrlist)
+                      for(const x of this.rcvrlist){
+                        if(x.uid == data.msg.sender){
+                          x.status = "Online"
+                          x.state = true
+                          x.time = moment.unix(data.msg.time).format("YYYY-MM-DD HH:mm:ss")
+                          
+                          return
+                        }
+            
+                      }
+            
+                      //this.rcvrlist.sort((a,b)=> a.state === b.state?-1:0)
+                      
+                      ///
+                    }
+                    /////////////////////////////////////
+                  }
+                }
+              })
+            }//check if rcvr is valid
+            
+        })
+      }
+      //////////////////////////////////////
+            //
+            this.long_data_all_str_rcvd = (event, obj) => {
+              console.log("all long data rcvd ",obj.msg)
+              zone.run(()=>{
+                this.snackBar.open(' You Recieved a new Email ', "Remove", {
+                  duration: 5000,
+                  verticalPosition: 'top',
+                  panelClass: ['blue-snackbar']
+                });
+              })
+            }
+            ///////////////////////
+            this.ack_perm_for_long_msg_star_handshake = (event,data)=>{
+              zone.run(()=>{
+                console.log("recieved request to allow transmission")
+                if(!this.accept_dialog_alradyopen){
+                  this.accept_dialog_alradyopen = true
+                      this.accept_dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+                        width: '250px',
+                        hasBackdrop: true,
+                        disableClose: true,
+                        data: "Do you want to accept new Mail " + " ?"
+                      });
+                    this.accept_dialogRef.afterClosed().subscribe(result=>{    
+                      console.log("value of result--",result)
+                      if(result){
+                        this.ipc.send("perm_of_acceptance_long_msg",true)
+                        this.accept_dialogRef.close('Closing')
+                        this.router.navigate(['/longmessage'])
+                      }else{
+                        this.ipc.send("perm_of_acceptance_long_msg",false)
+                        this.accept_dialogRef.close('Closing')
+                      }
+                    })
+                    /////////////////////////////////
+                    setTimeout(function(){
+                      if(this.accept_dialogRef){     
+                        this.accept_dialogRef.close()
+                        //this.ipc.send("perm_of_acceptance_long_msg",false)
+                        console.log("after 22 sec")
+      
+                      }
+                    }.bind(this),22 * 1000)
+                    setTimeout(function(){
+                      this.accept_dialog_alradyopen = false // be ready to rcv again
+                    }.bind(this),50 * 1000)
+                    /////////////////////////////////////
+                }
+      
+              })
+            } 
+      ///////////////////////////////////
+      if ((<any>window).require) {
+        try {
+
+          this.ipc = (<any>window).require('electron').ipcRenderer
+          this.ipc.on('rcv_my_id_enc_data_shipl', this.rcv_my_id_enc_data_shipl)
+          //this.ipc.on('own_gps_data', this.own_gps_data)
+          //this.ipc.on('status_msg_map', this.status_msg_map)
+          this.ipc.on('long_data_all_str_rcvd',this.long_data_all_str_rcvd)
+          this.ipc.on('ack_perm_for_long_msg_star_handshake',this.ack_perm_for_long_msg_star_handshake)
+             
+        }catch(e){}
+      }
+  }
+  
+  initMap(): void{
+    var bounds = new L.LatLngBounds(new L.LatLng(22.858,92.297), new L.LatLng(17.53751,86.58411))
+    this.map = L.map('map',{
+      center: [22.3569,91.7832],//bounds.getCenter(),//[22.3569,91.7832],
+      zoom: 12,
+      //maxBounds : bounds,
+      //maxBoundsViscosity: 0.75
+    })
+
+    const tiles = L.tileLayer(
+      'assets/maps/{z}/{x}/{y}.png'
+      //'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      ,{
+        maxZoom:13,
+        minZoom: 8
+       }
+    )
+    tiles.addTo(this.map)
+    this.layerGroup = L.layerGroup().addTo(this.map);
+  }
+  ngOnDestroy(){
+    console.log("inside ng on destroy")
+    clearInterval(this.myinterval)
+    //this.ipc.removeListener('status_msg_map', this.status_msg_map)
+    this.ipc.removeListener('rcv_my_id_enc_data_shipl',this.rcv_my_id_enc_data_shipl)
+    //this.ipc.removeListener('own_gps_data',this.own_gps_data)
+    //this.ipc.removeListener('text_msg',this.txt_msg)
+    this.ipc.removeListener('long_data_all_str_rcvd',this.long_data_all_str_rcvd)
+    this.ipc.removeListener('ack_perm_for_long_msg_star_handshake',this.ack_perm_for_long_msg_star_handshake)
+     
+  }
+  ngAfterViewInit(): void {
+    this.initMap()
+   /* var marker = L.marker([22.3569,91.7832]).addTo(this.map);
+    var marker2 = L.marker([22.340617,91.784651]).addTo(this.map);
+    var pointA = new L.LatLng(22.3569,91.7832);
+    var pointB = new L.LatLng(22.340617,91.784651);
+    var pointC = new L.LatLng(22.338025,91.791742);
+    var pointList = [pointA, pointB,pointC];
+      var firstpolyline = new L.Polyline(pointList, {
+        color: 'green',
+        weight: 3,
+        opacity: 0.9,
+        smoothFactor: 1
+    });
+    firstpolyline.addTo(this.map);*/
+  }
+  ngOnInit(): void {
+    this.ipc.send('send_my_id_enc_data_shipl',true);
+
+    this.myinterval = setInterval(function(){
+      this.ipc.send('send_my_id_enc_data_shipl',true);
+    }.bind(this),60000 * 2)
+  }
+  distance(lat1, lon1, lat2, lon2) {
+    if ((lat1 == lat2) && (lon1 == lon2)) {
+        return 0;
+    }
+    else {
+        var radlat1 = Math.PI * lat1/180;
+        var radlat2 = Math.PI * lat2/180;
+        var theta = lon1-lon2;
+        var radtheta = Math.PI * theta/180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+            dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180/Math.PI;
+        dist = dist * 60 * 1.1515;
+        //if (unit=="K") { dist = dist * 1.609344 }
+        //if (unit=="N") { dist = dist * 0.8684 }
+        return ((dist * 0.8684).toFixed(2)).toString()//dist;
+    }
+  }
+
+  toDegreesMinutesAndSeconds(coordinate) {
+    var absolute = Math.abs(coordinate);
+    var degrees = Math.floor(absolute);
+    var minutesNotTruncated = (absolute - degrees) * 60;
+    var minutes = Math.floor(minutesNotTruncated);
+    var seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+
+    return degrees + " " + minutes + " " + seconds;
+  }
+
+  convertDMS(lat, lng) {
+    var latitude = this.toDegreesMinutesAndSeconds(lat);
+    var latitudeCardinal = lat >= 0 ? "N" : "S";
+
+    var longitude = this.toDegreesMinutesAndSeconds(lng);
+    var longitudeCardinal = lng >= 0 ? "E" : "W";
+
+    return latitude + " " + latitudeCardinal + "\n" + longitude + " " + longitudeCardinal;
+  }
+
+}
+
+
+/// test data
+/*insert into gps_data(mtime,lat,long,uid) values('2022-03-16 11:14:00',20.62588,92.32307,'0004');
+insert into gps_data(mtime,lat,long,uid) values('2022-03-16 11:15:00',20.62315,92.30322,'0004');
+insert into gps_data(mtime,lat,long,uid) values('2022-03-16 11:16:00',20.62048,92.29034,'0004');
+insert into gps_data(mtime,lat,long,uid) values('2022-03-16 11:17:00',20.61841,92.28051,'0004');
+insert into gps_data(mtime,lat,long,uid) values('2022-03-16 11:18:00',20.61676,92.27475,'0004');
+
+*/

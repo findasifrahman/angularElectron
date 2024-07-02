@@ -1,0 +1,164 @@
+.my-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  
+  @import url('https://fonts.googleapis.com/css?family=Numans');
+  
+  .container{
+    //background-image: url('../../../assets/bg1.jpg');
+    background-size: cover;
+    
+    //background-repeat: no-repeat;
+    height: 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;;
+    font-family: 'Numans', sans-serif;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .card{
+    height: 370px;
+    margin-top: 100px;//auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+  }
+  
+  .social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+  }
+  
+  .social_icon span:hover{
+    color: white;
+    cursor: pointer;
+  }
+  
+  .card-header h3{
+    color: white;
+  }
+  
+  .social_icon{
+    position: absolute;
+    right: 20px;
+    top: -45px;
+  }
+  
+  .input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+  }
+  
+  input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+  
+  }
+  
+  .remember{
+    color: white;
+  }
+  
+  .remember input
+  {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+  
+  .login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+  }
+  
+  .login_btn:hover{
+    color: black;
+    background-color: white;
+  }
+  
+  .links{
+  color: white;
+  }
+  
+  .links a{
+  margin-left: 4px;
+  }
+
+  .chat{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .card2{
+    height: 50px;
+    border-radius: 15px !important;
+    margin-right: 15px;
+    background-color: rgba(0,0,0,0.4) !important;
+  }
+  .card-header{
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: 0 !important;
+  }
+  .img_cont{
+    position: relative;
+    height: 70px;
+    width: 70px;
+  }
+  .img_cont_msg{
+    height: 40px;
+    width: 40px;
+  }
+
+  #action_menu_btn{
+      position: absolute;
+      right: 40px;
+      top: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .action_menu{
+        z-index: 1;
+        position: absolute;
+        padding: 15px 0;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        border-radius: 15px;
+        top: 30px;
+        right: 15px;
+        display: none;
+    }
+    .action_menu ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .action_menu ul li{
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 5px;
+    }
+    .action_menu ul li i{
+      padding-right: 10px;
+    }
+    .action_menu ul li:hover{
+      cursor: pointer;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .example-spacer {
+      flex: 1 1 auto;
+    }

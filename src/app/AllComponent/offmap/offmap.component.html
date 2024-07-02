@@ -1,0 +1,24 @@
+<div class="row" style="margin-left:120px;color:#DC143C;">
+  <div fxFlex="20">
+    <button mat-button style="background-color: #8FBC8F;width:120px;;margin-top: 1px"  cdkFocusInitial (click)="cleartrack()">Clear Track</button>
+  </div>
+  <div fxFlex="40">
+    <h4 style="padding-left: 70px;color: seagreen">{{location_state_text}}</h4>
+  </div>
+  <div fxFlex="15" >
+    <mat-checkbox [(ngModel)]="isgps" style="margin-top: 1px;align-items: right;text-align: right;">Send GPS Position</mat-checkbox>
+  </div>
+  <div fxFlex="25" >
+    <button mat-button style="background-color: #8FBC8F;width:80px;margin-right: 20px;margin-top: 1px"  cdkFocusInitial (click)="edituseerset()">Ok</button>
+  </div>
+</div>
+
+
+    <div class="map-container">
+        <div class="map-frame">
+          <div id="map"></div>
+        </div>
+      </div>
+
+
+

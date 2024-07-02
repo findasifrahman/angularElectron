@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Electronchat</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" type="text/css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css" rel="stylesheet" type="text/html">
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script src="https://unpkg.com/mapbox-gl@1.11.1/dist/mapbox-gl.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/mapbox-gl@1.11.1/dist/mapbox-gl.css">
+
+  <script src="node_modules/chart.js/src/chart.js"></script>
+  <meta name="theme-color" content="#1976d2">
+  
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+  
+  
+</head>
+<body>
+  <app-root>
+    <style>
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :host {
+        flex-grow: 1;
+        height: 1px; /* Required to make the child 100% of the flex-grow: 1 */
+      }
+      html {
+        font-size: 10px;
+      }
+
+      body {
+        background-color: #111111;
+        overflow: hidden;
+      }
+    </style>
+  </app-root>
+</body>
+</html>

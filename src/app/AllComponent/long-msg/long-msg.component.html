@@ -1,0 +1,521 @@
+
+
+  
+  <div class="container h-50" style="padding-top: 10px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? 'white' : 'black' }" >
+    <div class="row justify-content-center h-100" >
+      <div class="col-md-3 col-xl-3 chat" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+        <div class="card-header" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+          <div class="input-group" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+            <input type="text" placeholder="Search..." name="" class="form-control search">
+            <div class="input-group-prepend">
+              <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body contacts_body" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+              <ul class="contacts" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? 'navy' : 'red'}">
+                <li style="margin: 0 !important;padding:0 !important">
+                  <div [ngClass]="{'active': showCompose === true}" class="d-flex bd-highlight;" style="padding-top:10px;padding-bottom:10px" (click)="compose_pressed()" >              
+                    <div class="user_info">
+                      <span style="color: rgb(0, 139, 139);font-family: roboto;font-size: large;">Compose </span>
+                    </div>
+                  </div>
+                </li>
+                <li  style="margin: 0 !important;padding:0 !important">
+                  <div  [ngClass]="{'active': showInbox === true}" class="d-flex bd-highlight" style="padding-top: 10px;padding-bottom: 10px;" (click)="inbox_pressed()" >              
+                    <div class="user_info">
+                      <span style="color: rgb(0, 139, 139);font-family: roboto;font-size: large;">Inbox </span>
+                    </div>
+                  </div>
+                </li>
+                <li  style="margin: 0 !important;padding:0 !important">
+                  <div [ngClass]="{'active': showSent === true}" class="d-flex bd-highlight" style="padding-top: 10px;padding-bottom: 10px;" (click)="sent_pressed()" >              
+                    <div class="user_info">
+                      <span style="color: rgb(0, 139, 139);font-family: roboto;font-size: large;">Sent </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li style="margin: 0 !important;padding:0 !important">
+                  <div [ngClass]="{'active': showDraft === true}" class="d-flex bd-highlight" style="padding-top: 10px;padding-bottom: 10px;" (click)="draft_pressed()" >              
+                    <div class="user_info">
+                      <span style="color: rgb(0, 139, 139);font-family: roboto;font-size: large; ">Draft </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li style="margin: 0 !important;padding:0 !important">
+                  <div [ngClass]="{'active': showArchieve === true}" class="d-flex bd-highlight" style="padding-top: 10px;padding-bottom: 10px;" (click)="archieve_pressed()" >              
+                    <div class="user_info">
+                      <span style="color: rgb(0, 139, 139);font-family: roboto;font-size: large; ">Archieved </span>
+                    </div>
+                  </div>
+                </li>
+  
+            </ul>
+        </div>
+  
+ 
+    </div>
+      <div class="col-md-9 col-xl-9 chat" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+        <div class="card" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+          <!--  end of chat -->
+          <div class="msg_card_body" *ngIf="showCompose" style="padding:10px" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+            <div class="input-group" style="margin-bottom: 0 !important; padding-bottom: 0 !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+              <div class="input-group-prepend" style="margin-top: 5px;height: 48px !important;">
+                <span class="input-group-text" style="height: 48px !important;width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">Send To</span>
+              </div>
+              <app-select-search style="margin-bottom: 0 !important;padding-bottom: 0 !important;" [formControlnam]="'user'" [preVal]="selectsearchval1" (outputval)="SelectvalChanged1($event)"  [list]= "send_to_arr"></app-select-search>                           
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">Precedence</span>
+              </div>
+              <!--
+              <input  [(ngModel)]="Routine"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="Precedence"/>
+              -->
+              <select class="form-control" [(ngModel)]="Routine" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" >
+                <option *ngFor="let dt of all_routine" [ngValue]="dt">{{dt}}
+                </option>
+              </select>
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">From</span>
+              </div>
+              <input [(ngModel)]="From"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="From"/>
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">To</span>
+              </div>
+              <input  [(ngModel)]="To"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="Action Addressee"/>
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">Info</span>
+              </div>
+              <input  [(ngModel)]="Info"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="Info Addressee"/>
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">XMT</span>
+              </div>
+              <input  [(ngModel)]="XMT"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="XMT Addressee"/>
+            </div>
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">Sy Classification</span>
+              </div>
+              <!--
+                <input  [(ngModel)]="Restricted"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="Security Classification"/>
+              -->
+              <select class="form-control" [(ngModel)]="Restricted" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" >
+                <option *ngFor="let dt of all_sy_class"  [ngValue]="dt">{{dt}}
+
+                </option>
+              </select>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}">DTG</span>
+              </div>
+              <input  [(ngModel)]="DTG"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="DTG"/>
+            </div>
+            <div class="input-group" style="margin-bottom: 20px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 170px; max-width: 170px !important;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'yellow'}" >Ref</span>
+              </div>
+              <input  [(ngModel)]="Ref"  type="text" class="form-control" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#008080' : '#D2691E'}" placeholder="Reference"/>
+            </div>
+            
+            <textarea   style="font-size: large;width: 100% !important;height: 100% !important;background-color: white;color:black; overflow-y: auto;" 
+              [(ngModel)]="inputText" (ngModelChange)="inputTextOnChange()"  name=""   placeholder="Type your message..." 
+              [ngStyle]="{'background-color': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : 'green','width': backcol == 'p' ? '100%' : '100%','height': backcol == 'p' ? '300px' : '300px'}"
+              ></textarea>
+            
+            <div class="row" >
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                  <button class="form-control" (click)="save_to_draft()" [ngStyle]="{'backgroundColor': backcol == 'p' ? '#006400' : 'black', 'color': backcol == 'p' ? 'white' : '#006400'}">Save To Draft</button>
+              </div>
+              <div class="col-md-8 col-lg-8 col-sm-8">
+                <button class="form-control" style="color: red;" (click)= "FormSubmit()" [ngStyle]="{'backgroundColor': backcol == 'p' ? '#A52A2A' : 'black', 'color': backcol == 'p' ? 'white' : '#00FFFF'}">Send</button>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="showCompose" >
+            <p style="color: black;font-size:large;margin-left: 15px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'black' : '#87CEFA'}">{{inputtext_length}}</p>
+          
+          </div>
+          <!-- End of compose   -->
+          <!-- Start of test inbox -->
+          <fieldset class="scheduler-border" [hidden]="!showInbox"  >
+            <div fxLayout fxLayoutAlign="center center">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" (keyup)="doFilter_inbox($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-table [dataSource]="AllElement_inbox"  multiTemplateDataRows class="mat-elevation-z8" >
+                    <ng-container matColumnDef="subject">
+                      <mat-header-cell *matHeaderCellDef> Inbox </mat-header-cell>
+                      <mat-cell *matCellDef="let Element" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"> 
+                        <div>
+                          <div style="cursor: pointer;" (click)="inbox_msg_clicked(Element)" class="input-group" >
+                            <p  style="font-size: large;padding-right: 10px; "  >{{Element.recieved_from}},  </p> 
+                            <p  type="text" style="font-size: large;" > {{Element.dtg}}</p> 
+                          </div>
+                          <div (click)="inbox_msg_clicked(Element)"  style="cursor: pointer;margin-top: 1px !important;padding-top:1px !important;">
+                            <p>{{Element.showtime}} </p>
+                          </div>
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="buttons">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+                      <mat-cell *matCellDef="let AllElement_inbox" (click)="$event.stopPropagation()" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }">
+                        <button mat-button color="warn" (click)="onForward(AllElement_inbox,AllElement_inbox.mtime,AllElement_inbox.sender,AllElement_inbox.dtg)">
+                          <mat-icon>forward_to_inbox</mat-icon>
+                        </button>
+                        <button mat-button color="warn" (click)="onDelete_inbox(AllElement_inbox.id,AllElement_inbox.mtime,AllElement_inbox.sender,AllElement_inbox.dtg)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+
+                      </mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matHeaderRowDef="displayedColumns_inbox; sticky: true"></mat-header-row>
+                    <mat-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matRowDef="let row; columns: displayedColumns_inbox;"></mat-row>
+            
+                  </mat-table>
+                  <mat-paginator style="background:cyan ;" [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                </div>
+              </div>
+            
+            </fieldset>
+            
+          <!-- End of test inbox   -->
+          <!--
+          <div class="msg_card_body" style="padding: 10px;"  *ngIf="showInbox" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#2F4F4F' : '#3CB371' }"> 
+            <h4 style="color: rgb(47, 79, 79);border-radius: 3px;border-width: 3px;border-bottom: black;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }">Inbox</h4>
+            <div *ngFor="let c of inboxlist; index as i" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#2F4F4F' : '#3CB371' }">
+                <div class="row" style="padding:10px" >
+                  <div class="col-md-10">
+                    <div style="cursor: pointer;" (click)="inbox_msg_clicked(i)" class="input-group" >
+                      <p  style="font-size: large;padding-right: 10px; "  >{{c.recieved_from}},  </p> 
+                      <p  type="text" style="font-size: large;" > {{c.dtg}}</p> 
+                    </div>
+                    <div style="cursor: pointer;margin-top: 1px !important;padding-top:1px !important;">
+                      <p>{{c.showtime}} </p>
+                    </div>
+                  </div>
+                  <div class="-col-md-2">
+                    <button mat-button color="#ffffff" (click)="onDelete(c.id,c.mtime,c.sender,c.dtg)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                  
+                </div>
+                <hr/>
+            </div>
+          </div>
+          -->
+          <!-- End of Inbox  -->
+          <!-- Start of test sent -->
+          <fieldset class="scheduler-border" [hidden]="!showSent"  >
+            <div fxLayout fxLayoutAlign="center center">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" (keyup)="doFilter_sent($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-table [dataSource]="AllElement_sent"  multiTemplateDataRows class="mat-elevation-z8" >
+                    <ng-container matColumnDef="subject">
+                      <mat-header-cell *matHeaderCellDef> Sent Mail </mat-header-cell>
+                      <mat-cell *matCellDef="let Element" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"> 
+                        <div>
+                          <div style="cursor: pointer" (click)="sent_msg_clicked(Element)" class="input-group" >
+                            <p  style="font-size: large;padding-right: 10px; "  >{{Element.recieved_from}},  </p> 
+                            <p  type="text" style="font-size: large;" > {{Element.dtg}}</p> 
+                          </div>
+                          <div style="cursor: pointer" (click)="sent_msg_clicked(Element)">
+                            <p>{{Element.showtime}} </p>
+                          </div>
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="buttons">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let AllElement_sent" (click)="$event.stopPropagation()" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }">
+                        <button mat-button color="warn" (click)="onForward(AllElement_sent,AllElement_inbox.mtime,AllElement_inbox.sender,AllElement_inbox.dtg)">
+                          <mat-icon>forward_to_inbox</mat-icon>
+                        </button>
+                        <button mat-button color="warn" (click)="onDeletesent(AllElement_sent.id,AllElement_sent.mtime,AllElement_sent.sender,AllElement_sent.dtg)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+
+                      </mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matHeaderRowDef="displayedColumns_sent; sticky: true"></mat-header-row>
+                    <mat-row  [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matRowDef="let row; columns: displayedColumns_sent;"></mat-row>
+            
+                  </mat-table>
+                  <mat-paginator style="background:cyan ;"  [pageSize]="6" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                </div>
+              </div>
+            
+            </fieldset>
+            
+          <!-- End of test sent  -->
+          <!--
+          <div class="msg_card_body" style="margin: 10px;"  *ngIf="showSent" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? 'grey' : 'white'}"> 
+            <h4 style="color: rgb(47, 79, 79);border-radius: 3px;border-width: 3px;border-bottom: black;"[ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }">Sent</h4>
+            <div *ngFor="let c of sentlist; index as i" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black', 'color': backcol == 'p' ? '#2F4F4F' : '#3CB371' }">
+              <div class="row" style="padding:10px">
+                <div class="col-md-10">
+                  <div style="cursor: pointer" (click)="sent_msg_clicked(i)" class="input-group" >
+                    <p  style="font-size: large;padding-right: 10px; "  >{{c.recieved_from}},  </p> 
+                    <p  type="text" style="font-size: large;" > {{c.dtg}}</p> 
+                  </div>
+                  <div style="cursor: pointer" (click)="sent_msg_clicked(i)">
+                    <p>{{c.showtime}} </p>
+                  </div>
+                </div>
+                <div class="-col-md-2">
+                  <button mat-button color="#ffffff" (click)="onDeletesent(c.id,c.mtime,c.sender,c.dtg)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <hr/>
+            </div>
+          </div>
+        -->
+          <!-- End of Sent -->
+          
+          <div class="msg_card_body" *ngIf="showUnsent"> 
+            <h4 style="color:rgb(47, 79, 79);border-radius: 3px;border-width: 3px;border-bottom: black;">Unsent</h4>
+           
+          </div>
+          <!-- End of Unsent  -->
+          <!-- Start of test draft -->
+          <fieldset class="scheduler-border" [hidden]="!showDraft" >
+            <div fxLayout fxLayoutAlign="center center">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" (keyup)="doFilter_draft($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-table [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" [dataSource]="AllElement_draft" multiTemplateDataRows >
+                    <ng-container matColumnDef="subject">
+                      <mat-header-cell *matHeaderCellDef> Draft </mat-header-cell>
+                      <mat-cell [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" *matCellDef="let Element"> 
+                        <div>
+                          <div style="cursor: pointer" (click)="draft_msg_clicked(Element)" class="input-group" >
+                            <p  style="font-size: large;padding-right: 10px; "  >{{Element.from}},  </p> 
+                            <p  type="text" style="font-size: large;" > {{Element.dtg}}</p> 
+                          </div>
+                          <div style="cursor: pointer" (click)="draft_msg_clicked(Element)">
+                            <p>{{Element.subtext}} </p>
+                          </div>
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="buttons">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell >
+                      <mat-cell *matCellDef="let AllElement_draft" (click)="$event.stopPropagation()" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" >
+                        <button mat-button color="warn" (click)="onDeletedraft(AllElement_draft.id,AllElement_draft.mtime,AllElement_draft.sender,AllElement_draft.dtg)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+
+                      </mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matHeaderRowDef="displayedColumns_draft; sticky: true"></mat-header-row>
+                    <mat-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matRowDef="let row; columns: displayedColumns_draft;"></mat-row>
+            
+                  </mat-table >
+                  <mat-paginator style="background:cyan ;"  [pageSize]="2"  [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                </div>
+              </div>
+            
+          </fieldset>
+            
+          <!-- End of test draft  -->
+          <!--
+          <div class="msg_card_body" style="margin: 10px;" *ngIf="showDraft"> 
+            <h4 style="color: navy;border-radius: 3px;border-width: 3px;border-bottom: black;"[ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }">Draft</h4>
+           
+            <div *ngFor="let c of draftlist; index as i" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#2F4F4F' : '#3CB371'}">
+                  <div class="row" style="padding:10px" >
+                    <div class="col-md-10">
+                      <div style="cursor: pointer" (click)="draft_msg_clicked(i)" class="input-group" >
+                        <p   style="font-size: large;padding-right: 10px; "  >{{c.from}}, </p> 
+                        <p   style="font-size: large;" > {{c.dtg}}</p> 
+                      </div>
+                      <div style="cursor: pointer;margin-top: 1px !important;padding-top:1px !important;" (click)="draft_msg_clicked(i)" class="input-group" >
+                        <p   style="font-size: large;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? 'black' : '#D3D3D3' }" > {{c.subtext}}</p> 
+
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <button mat-button color="#1122cc" (click)="onDeletedraft(c.id,c.mtime,c.from,c.dtg)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                </div>
+                <hr/>
+              </div>
+          </div>
+        -->
+          <!-- End of Draft  -->
+          <!-- start of archieve -->
+          <fieldset class="scheduler-border" [hidden]="!showArchieve" >
+            <div fxLayout fxLayoutAlign="center center">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" (keyup)="doFilter_archieve($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-table [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" 
+                    [dataSource]="AllElement_archieve" matTableExporter  multiTemplateDataRows class="mat-elevation-z8" >
+                    <ng-container matColumnDef="subject">
+                      <mat-header-cell *matHeaderCellDef> Archieve </mat-header-cell>
+                      <mat-cell [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" *matCellDef="let Element"> 
+                        <div>
+                          <div style="cursor: pointer" (click)="archieve_msg_clicked(Element)" class="input-group" >
+                            <p  style="font-size: large;padding-right: 10px; "  >{{Element.recieved_from}},  </p> 
+                            <p  type="text" style="font-size: large;" > {{Element.dtg}}</p> 
+                          </div>
+                          <div style="cursor: pointer" (click)="archieve_msg_clicked(Element)">
+                            <p>{{Element.showtime}} </p>
+                          </div>
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="buttons">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let AllElement_archieve" (click)="$event.stopPropagation()" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }" >
+                        <button mat-button color="warn" (click)="onDeletearchieve(AllElement_archieve.id,AllElement_archieve.mtime,AllElement_archieve.sender,AllElement_archieve.dtg)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+
+                      </mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matHeaderRowDef="displayedColumns_archieve; sticky: true"></mat-header-row>
+                    <mat-row [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006400' : '#FFFF00' }"  *matRowDef="let row; columns: displayedColumns_archieve;"></mat-row>
+            
+                  </mat-table>
+                  <mat-paginator style="background:cyan ;"  [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                </div>
+              </div>
+            
+            </fieldset>
+          <!-- End of archieve -->
+
+          <button #printt printTitle="Formatted Message" hidden="true" [useExistingCss]="true" printSectionId="printVar" ngxPrint></button>
+        
+          <div *ngIf="showSingleMail" style="margin: 20px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'green','color': backcol == 'p' ? 'navy' : 'white' }" (click)="triggerPrint();">
+            <span id="action_menu_btn" ><i class="fas fa-print" style="color: red;"></i></span>
+            <div class="action_menu">
+              <ul>
+                <li ><i class="fas fa-user-circle"></i> print</li>
+                
+              </ul>
+            </div>
+          </div>
+          <div class="msg_card_body" style="margin: 10px;;" *ngIf="showSingleMail" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? 'black' : 'green' }"  id="printVar">
+
+
+            <div class="input-group" style="margin-bottom: 10px;width: 100%;">
+              <text  type="text"  style="font-size: large;width: 100px; "  >{{curr_routine}}</text> 
+            </div>
+  
+            <div class="row">
+              <div class="col-md-2">
+                <span class="input-group-addon" style="font-size: large; width: 100px;"  >FROM </span>
+            
+              </div>
+              <div class="col-md-10">
+                <text  type="text"  style="font-size: large;width: 100px; "  >{{curr_from}}</text> 
+           
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <span class="input-group-addon" style="font-size: large; width: 100px;"  >TO </span>
+            
+              </div>
+              <div class="col-md-10">
+                <text  type="text"  style="font-size: large;width: 100px; "  >{{curr_to}}</text> 
+           
+              </div>
+            </div>
+
+            <div class="row" *ngIf="curr_info">
+              <div class="col-md-2">
+                <span class="input-group-addon" style="font-size: large; width: 100px;"  >INFO </span>
+            
+              </div>
+              <div class="col-md-10">
+                <text  type="text"  style="font-size: large;width: 100px; "  >{{curr_info}}</text> 
+           
+              </div>
+            </div>
+
+
+            <div class="row" *ngIf="curr_xmt"> 
+              <div class="col-md-2">
+                <span class="input-group-addon" style="font-size: large; width: 100px;"  >XMT </span>
+            
+              </div>
+              <div class="col-md-10">
+                <text  type="text"  style="font-size: large;width: 100px; "  >{{curr_xmt}}</text>          
+              </div>
+            </div>
+            <div class="input-group" style="margin-top:20px;margin-bottom: 40px;width: 100%;">
+              <div style="font-size: large; " [innerHTML]="curr_restricted"></div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 10px;width: 100%;">
+              <div style="font-size: large;justify-content: left; " [innerHTML]="curr_text">
+              </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 10px;padding-left: 450px;padding-top: 20px;width: auto;text-align: end;justify-content: end;">
+              <text  type="text"  style="font-size: large;text-align: end;align-items: flex-end; "  >{{curr_dtg}}</text> 
+            </div>
+
+
+            <div class="row" *ngIf="curr_ref">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-8 col-lg-8 input-group">
+                <span class="input-group-addon" style="font-size: large; width: 98% !important;"  >REF: {{curr_ref}}</span>   
+        
+              </div>
+
+            </div>
+
+          </div>
+          <!-- End of single mail view  -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ngx-spinner></ngx-spinner>

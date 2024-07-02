@@ -1,0 +1,271 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.2.1/css/ol.css');
+@import '~@angular/material/theming';
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html, body { height: 100%; width: 100%; max-width: 100%;max-height: 100% !important;  }
+body { margin: 0; padding: 0; 
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 
+  Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+
+@media (min-width: 992px){
+  .container, .container-lg, .container-md, .container-sm {
+    max-width: '100%';//560px;
+    min-width: fit-content;
+  }
+}
+@media (min-width: 768px){
+.container, .container-md, .container-sm {
+  max-width: '100%'//560px;
+}
+}
+@media (min-width: 576px){
+.container, .container-sm {
+    max-width: '100%';//560px;
+    min-width: fit-content;
+}
+}
+
+.red-snackbar {
+  background: #ff6a00 !important;
+  color:whitesmoke !important;
+  padding-top: 15px !important;
+}
+.blue-snackbar {
+  background: #18c751 !important;
+  color: whitesmoke !important;
+  padding-top: 15px !important;
+}
+.green-snackbar {
+  background: #18c751 !important;
+  color: whitesmoke !important;
+  padding-top: 15px !important;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/*-------------------------------------------------------------------*/
+/* === Import Bootstrap functions and variables === */
+/*-------------------------------------------------------------------*/
+/* === Import template variables === */
+/*-------------------------------------------------------------------*/
+/* === Boostrap Main SCSS === */
+/*!
+ * Bootstrap v4.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+ :root {
+  --blue: #5e50f9;
+  --indigo: #6610f2;
+  --purple: #6a008a;
+  --pink: #e91e63;
+  --red: #f96868;
+  --orange: #f2a654;
+  --yellow: #f6e84e;
+  --green: #46c35f;
+  --teal: #58d8a3;
+  --cyan: #57c7d4;
+  --white: #ffffff;
+  --gray: #6c757d;
+  --gray-dark: #0f1531;
+  --blue: #5e50f9;
+  --indigo: #6610f2;
+  --purple: #6a008a;
+  --pink: #e91e63;
+  --red: #f96868;
+  --orange: #f2a654;
+  --yellow: #f6e84e;
+  --green: #46c35f;
+  --teal: #58d8a3;
+  --cyan: #57c7d4;
+  --white: #ffffff;
+  --gray: #434a54;
+  --gray-light: #aab2bd;
+  --gray-lighter: #e8eff4;
+  --gray-lightest: #e6e9ed;
+  --black: #000000;
+  --primary: #032a63;
+  --secondary: #3a3a3a;
+  --success: #3e8177;
+  --info: #4d7cff;
+  --warning: #f5a623;
+  --danger: #d1011c;
+  --light: #f8f8f8;
+  --dark: #000000;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+/*maticon.woff2
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/fonts/maticon.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+@font-face {
+  font-family: solaiman;
+  src: url(assets/fonts/SolaimanLipi.ttf) format("opentype");
+}
+@font-face {
+  font-family: solaimanLipi_bold;
+  src: url(assets/fonts/SolaimanLipi_Bold.ttf) format("opentype");
+}
+@font-face {
+  font-family: benne;
+  src: url(assets/fonts/Benne.ttf) format("opentype");
+}
+@font-face {
+  font-family: roboto;
+  src: url(assets/fonts/Roboto-Regular.ttf) format("opentype");
+}
+@font-face {
+  font-family: roboto-black;
+  src: url(assets/fonts/Roboto-Black.ttf) format("opentype");
+}
+@font-face {
+  font-family: kalpurush;
+  src: url(assets/fonts/kalpurush.ttf) format("opentype");
+}
+@font-face {
+  font-family: merriweather;
+  src: url(assets/fonts/Merriweather-Regular.ttf) format("opentype");
+}
+body {
+  margin: 0;
+  font-family: kalpurush;
+  font-size: 1rem;
+  //font-weight: 400;
+  //line-height: 1.5;
+  //color: #3a3a3a;
+  text-align: left;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.class-popup .leaflet-popup-content-wrapper {
+  background: rgba(29,138,254,0.5);
+  color: #fff;
+  padding:2px !important;
+}
+
+.class-popup .leaflet-popup-content-wrapper a {
+  background: rgba(29,138,254,0.5);
+  padding:2px !important;
+}
+
+/*.class-popup .leaflet-popup-tip-container {
+  width: 40px;
+  height: 20px;
+}*/
+
+.class-popup .leaflet-popup-tip {
+  background: rgba(84, 107, 133, 0.5);
+}
+
+
+/* tooltip-class*/
+
+.leaflet-tooltip.class-tooltip {
+  background: green;
+  border: 2px solid cyan
+}
+
+.leaflet-tooltip-left.class-tooltip::before {
+  border-left-color: cyan;
+}
+
+.leaflet-tooltip-right.class-tooltip::before {
+  border-right-color: cyan;
+}

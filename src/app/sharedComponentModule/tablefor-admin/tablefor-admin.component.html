@@ -1,0 +1,74 @@
+    <!-----------Active device------------->
+
+    <div fxLayout fxLayoutAlign="center center" style="margin-top: 100px;">
+    <mat-form-field fxFlex="60%">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    </div>
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch" style="margin-left: 45px;">
+    <div class="col-md-12"> 
+    <mat-table [dataSource]="mydeviceList" multiTemplateDataRows class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="uid">
+            <mat-header-cell *matHeaderCellDef> IMAI </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.uid}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="userId">
+            <mat-header-cell *matHeaderCellDef>Id </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.userId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="username">
+            <mat-header-cell *matHeaderCellDef>UserName </mat-header-cell>
+            <mat-cell style="color: yellow" (click)="onUserNameClick(Element.userId)" *matCellDef="let Element"> {{Element.username}}  <mat-icon>eye</mat-icon> </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="activateDate">
+            <mat-header-cell *matHeaderCellDef>Activate Date </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.activateDate}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="deviceName">
+            <mat-header-cell *matHeaderCellDef>Plate No. </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.deviceName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="simNo">
+            <mat-header-cell *matHeaderCellDef>Sim </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.simNo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="expireDate">
+            <mat-header-cell *matHeaderCellDef>Expired Date </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.expireDate}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="monthFee">
+            <mat-header-cell *matHeaderCellDef>Fee </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.monthFee}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef>Address </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.address}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="backup_day">
+            <mat-header-cell *matHeaderCellDef>Backup Day </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.backup_day}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="device_model">
+            <mat-header-cell *matHeaderCellDef>Model </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.device_model}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="package_type">
+            <mat-header-cell *matHeaderCellDef>Package </mat-header-cell>
+            <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.package_type}} </mat-cell>
+        </ng-container>
+
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row style="background-color:black;border-color: cornsilk;border-width: 1px" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+        </mat-table>
+        <mat-paginator [pageSize]="20" [pageSizeOptions]="[2, 4, 6, 10, 20, 30]"></mat-paginator>
+    
+    </div>
+</div>
+
+    <!------------------------>

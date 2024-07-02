@@ -1,0 +1,53 @@
+    <!-- Sidebar -->
+
+    <div id="viewport">
+      <div  id="sidebar" >
+          <header style="padding-bottom: 30px;">
+              <a href="#" style="font-size: 18px;">{{Administrator}}</a>
+              <span>
+                <button mat-fab color="accent" style="width: 80px;height: 70px;font-size: 30px; background:grey">
+                  <mat-icon aria-hidden="false" inline=true appearance="outline" style="color: honeydew;">{{loggedUserName}}</mat-icon>
+                </button>
+              </span>
+          </header>
+  
+            <li class="nav">
+              <a class="nav-link" (click)="homeClick()" style="display: inline-flex;" ><i><mat-icon aria-hidden="false">home</mat-icon></i>Home</a>
+            </li>
+
+            <li class="nav" [hidden] = "isShowSettingsli">
+              <a class="nav-link nav-dropdown-toggle" style="display: inline-flex;"  (click) = toggleDisplaySettings()>
+                <i><mat-icon aria-hidden="false">indeterminate_check_box</mat-icon></i> Settings
+              </a>
+              <div style="padding-top: 0 !important;" class="nav-link nav-dropdown-toggle" [hidden] = "isShowSettings">
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/vendor/add"]'><i><mat-icon aria-hidden="false">contact_page</mat-icon></i>Add Vendor</a>
+                </li>
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/vendor/list"]'><i><mat-icon aria-hidden="false">dns</mat-icon></i>Vendor List</a>
+                </li>
+  
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/user/add"]'><i><mat-icon aria-hidden="false">airline_seat_individual_suite</mat-icon></i>Add User</a>
+                </li>
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/user/list"]'><i><mat-icon aria-hidden="false">zoom_out_map</mat-icon></i>User List</a>
+                </li>
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/device/add"]'><i><mat-icon aria-hidden="false">airline_seat_individual_suite</mat-icon></i>Add Device</a>
+                </li>
+                <li class="nav-item">
+                  <a style="text-align:left;display: inline-flex;" class="nav-link" [routerLink]='["/device/list"]'><i><mat-icon aria-hidden="false">zoom_out_map</mat-icon></i>Device List</a>
+                </li>
+              </div>
+            </li>
+
+
+            <li class="nav">
+              <a class="nav-link" [routerLink]='["/logout"]' style="display: inline-flex;" ><i><mat-icon aria-hidden="false">input</mat-icon></i>Logout</a>
+            </li>
+  
+      </div>
+    </div>
+  
+  

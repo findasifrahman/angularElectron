@@ -1,0 +1,19 @@
+<nav class='sticky navbar navbar-expand-xl  navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow sticky-top'style="margin-bottom:0px !important;padding-bottom:0 !important">
+    <a class="navbar-brand" style="color:greenyellow;font-size:14;font-family: 'Numans', sans-serif;" [routerLink]='["/"]'> GPS Tracking </a>
+    <a class="" style="color:honeydew;font-size:12;position: absolute;font-family: 'Numans', sans-serif;left:0;text-align: center;width:100%" [routerLink]='["/"]'>AutoSol <img/></a>
+    <button class="navbar-toggler" type="button"  (click)="toggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+      <ul class="navbar-nav flex-grow-0">
+        <li class="nav-item"  [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <a class="nav-link text-light" (click)="toggle()" style="font-size:12px;font-family: 'Numans', sans-serif;" [routerLink]='["/"]'>(+88) 1719086713
+            |
+            info@intricatlab.com
+            </a>
+        </li>
+
+      </ul>
+    </div>
+</nav>
+

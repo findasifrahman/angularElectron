@@ -1,0 +1,77 @@
+
+  <!-- Sidebar -->
+  <mat-sidenav-container fullscreen style="background-color: black; overflow-y: hidden !important;">
+      <mat-sidenav mode="side" #sidenav opened position="start" id="sidebar"
+      [opened]="screenWidth > 240" [mode]="(screenWidth > 240) ? 'side' : 'over'" style="background-color: black;">
+  
+      <header style="padding-top: 40px;padding-bottom: 30px;background-color: #006994;">
+        <h6  style="font-size: 18px;color:yellow;text-align: center;justify-content: center;">Bijoy-50 BNTMS (Admin)</h6>
+
+      </header>
+
+          <li class="nav">
+            <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/addgroup"]' ><i><mat-icon aria-hidden="false">alarm_on</mat-icon></i>Add Group</a>
+         </li>
+         <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/listgroup"]' ><i><mat-icon aria-hidden="false">home</mat-icon></i>Group List</a>
+          </li> 
+          <li class="nav">
+            <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/voiceencedit"]' ><i><mat-icon aria-hidden="false">alarm_on</mat-icon></i>Voice Encrytion</a>
+          </li>
+          <li class="nav">
+            <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/dataencedit"]' ><i><mat-icon aria-hidden="false">alarm_on</mat-icon></i>Data Encrytion</a>
+          </li>
+          <li class="nav">
+            <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/bncgencedit"]' ><i><mat-icon aria-hidden="false">alarm_on</mat-icon></i>BN-CG Data Encrytion</a>
+          </li>
+         <li class="nav" *ngIf="isShowSettingsli">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/editmyid"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Self Id</a>
+        </li>
+        <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/alluser"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Add Ship</a>
+        </li>
+        <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/listuser"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>All Ship</a>
+        </li>
+
+        <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/addalluser"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Add System User</a>
+        </li>
+        <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/listalluser"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>User List</a>
+        </li>
+        <li class="nav" *ngIf="isShowSettingsli">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/changeallfreq"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Change Voice Frequency</a>
+        </li>
+        <li class="nav" *ngIf="isShowSettingsli">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/alldatafreq"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Change Data Frequency</a>
+        </li>
+        <li class="nav" >
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/editstatusmsg"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Status Message State</a>
+        </li>
+        <li class="nav" >
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/editmeshstate"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Mesh State</a>
+        </li>
+        <li class="nav" >
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/deletechat"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Delete Opl Comm</a>
+        </li>
+        <li class="nav" *ngIf="isShowSettingsli">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/systemreset"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>System Reset</a>
+        </li>
+        <!--
+        <li class="nav">
+          <a class="nav-link" style="display: inline-flex;" [routerLink]='["/admin/editspreadfactor"]' ><i><mat-icon aria-hidden="false">article</mat-icon></i>Data Speed</a>
+        </li>
+        -->
+          <li class="nav">
+             <a class="nav-link" [routerLink]='["/"]' style="display: inline-flex;" ><i><mat-icon aria-hidden="false">input</mat-icon></i>Logout</a>
+          </li> 
+  </mat-sidenav>
+
+
+  <mat-sidenav-content style="background-color: '#ffffff'" >
+
+        <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container >
+

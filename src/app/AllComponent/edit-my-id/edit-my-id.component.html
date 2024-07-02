@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="d-flex justify-content-center h-100 w-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Edit Device Id</h3>
+
+        </div>
+        <div class="card-body">
+          <form [formGroup]="Forms">
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="id" formControlName="uid">             
+            </div>
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="NAME OF THIS DEVICE" formControlName="ship">
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Edit" (click)="FormSubmit()"  [disabled]="!Forms.valid" class="btn float-right login_btn">
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+

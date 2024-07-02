@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="d-flex justify-content-center h-100 w-100">
+    <div class="card">
+      <div class="card-header">
+        <h3>Add New Group</h3>
+
+      </div>
+      <div>
+          <mat-form-field style="width: 90% !important;margin: 20px;">
+              <mat-label>Select Member</mat-label>
+              <mat-select #select [ngModel]="selectedItem"  (ngModelChange)="selectChanged($event)" multiple>
+                <div class="select-all">
+                    <mat-checkbox [(ngModel)]="allSelected"
+                                    [ngModelOptions]="{standalone: true}"
+                                    (change)="toggleAllSelection()">Select All</mat-checkbox>
+                </div>
+                <mat-option *ngFor="let car of  rcvr_arr " [value]="car">
+                  {{car.ship}}
+                </mat-option>
+              </mat-select>
+          
+              <mat-hint>Group Member Name</mat-hint>
+          </mat-form-field>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="Forms">
+          <div class="input-group form-group">
+            <input type="text" class="form-control" placeholder="Group Name" formControlName="gr_name" required>       
+          </div>
+          <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="3 digit Group number" formControlName="gr_number" required>       
+          </div>
+           <!--
+          <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Member Id between 1-5" formControlName="membar_id" required>       
+          </div>
+
+           
+            <input type="text" class="form-control" placeholder="ship" formControlName="ship">
+            -->
+        
+          <div class="form-group">
+            <input type="submit" value="ADD" (click)="FormSubmit()"  [disabled]="!Forms.valid" class="btn float-right login_btn">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,121 @@
+<mat-progress-bar
+  *ngIf="loading" color="accent" mode="indeterminate">
+</mat-progress-bar>
+
+<mat-toolbar color="primary"  style="height: 8vh;background-color: #006994 ;">
+<button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" fxHide.gt-sm="true">
+  <mat-icon >menu</mat-icon>
+</button>
+
+
+<mat-icon (click)="gotohome()"   style="cursor: pointer;;padding-right: 1px !important;margin-right: 1px;">home</mat-icon>
+
+<div fxShow="true" fxHide.lt-md="false">
+
+  <!--
+  <button mat-button  class="txt" >
+    <span (click)="editdataenc()" style="font-family:merriweather;font-size: 14px;">Data_Enc_key</span>
+  </button>
+-->
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="changebackcol()" style="font-family:merriweather;font-size: 14px;">Day/Night</span>
+  </button>
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="opl_chat()" style="font-family:merriweather;font-size: 14px;"><i class="fas fa-comment-alt" matBadge={{no_of_new_chat_msg}} matBadgePosition="before" matBadgeSize="small" matBadgeColor="warn" [matBadgeHidden]="chathidden" ></i></span>
+  </button>
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="long_message()" style="font-family:merriweather;font-size: 14px;"><i class="fas fa-envelope" matBadge={{no_of_new_mail_msg}} matBadgePosition="before" matBadgeSize="small" matBadgeColor="warn" [matBadgeHidden]="mailhidden"></i></span>
+  </button>
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="location()" style="font-family:merriweather;font-size: 14px;"><i class="fas fa-map"></i></span>
+  </button>
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="gotovoiceset()" style="font-family:merriweather;font-size: 14px;"><i class="fas fa-microphone"></i></span>
+  </button>
+  <button mat-button  class="txt" *ngIf="mymenshow" >
+    <span (click)="gotodataset()" style="font-family:merriweather;font-size: 14px;"><i class="fas fa-cog"></i></span>
+  </button>
+  <button mat-button  class="txt" >
+    <span (click)="login()" style="font-family:merriweather;font-size: 14px;">Admin</span>
+  </button>
+
+</div>
+<span class="example-spacer"></span>
+
+<button mat-button   class="txt" >
+    <span style="font-family:merriweather;font-size: 14px;">{{my_name}}</span>
+  </button>
+
+</mat-toolbar>
+
+
+<mat-sidenav-container >
+
+<!--
+<mat-sidenav color="primary" style="padding-top: 2vh;padding-right:2rem;padding-left: 2rem;background-color: #006994; justify-content: left;text-align: left; align-items: left;" 
+#sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+
+</mat-sidenav>
+-->
+
+<mat-sidenav-content [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+
+
+      <div fxLayout="row" class="mat-elavation-z4"  fxLayoutGap="10px" style="margin-left:60px;margin-top: 5px !important;margin-bottom: 1px;">
+        <div fxFlex="10" style="align-items: center;text-align: center;margin-top: 10px !important;" >
+          <mat-icon (click)="gotohome()" [ngStyle]="{'color': voice_rx_color ? 'green' :  null }"  style="transform: scale(2);">network_wifi</mat-icon>
+        </div>
+        <div fxFlex="20" style="margin-left: 2px;margin-top: 5px !important;">
+          <h5 style="color: RED;text-align: left;">Voice Rx {{rx_rssi_val}}</h5>
+        </div>
+        <div fxFlex="10" style="align-items: center;text-align: center;margin-top: 10px !important;">
+          <mat-icon (click)="gotohome()" [ngStyle]="{'color': voice_tx_color ? 'green' :  null }"   style="transform: scale(2);">cell_tower</mat-icon>
+ 
+        </div>
+        <div fxFlex="20" style="align-items: center;text-align: center;margin-top: 5px;">
+          <h5 style="color: RED;text-align: left;">Voice Tx</h5>
+        </div>
+        <div fxFlex="10" style="align-items: center;text-align: center;">
+          <mat-icon (click)="gotohome()" [ngStyle]="{'color': gps_color ? 'green' :  null }"   style="transform: scale(1.2);">gps_fixed</mat-icon>
+          <h6 style="color: RED;text-align: center;">GPS</h6>
+        </div>
+        <div fxFlex="10" style="align-items: center;text-align: center;">
+          <mat-icon (click)="gotohome()" [ngStyle]="{'color': data_module_color ? 'green' :  null }"  style="transform: scale(1.2);">lightbulb</mat-icon>
+          <h6 style="color: RED;text-align: center;">Data_M</h6>
+        </div>
+        <div fxFlex="10" style="align-items: center;text-align: center;">
+          <mat-icon (click)="gotohome()" [ngStyle]="{'color': voice_module_color ? 'green' :  null }"   style="transform: scale(1.2);">lightbulb</mat-icon>
+          <h6 style="color: RED;text-align: center;">Voice_M</h6>
+        </div>
+      </div>
+      <div fxLayout="row"  fxLayoutGap="1px" style="margin: 0 !important;padding:0 !important" *ngIf="showCallState">
+        <div fxFlex="100" style="align-items: center;text-align: center; margin:0 !important; padding: 0 !important;">  
+          <h5 style="margin: 0 !important;padding: 0 !important;text-align: center;justify-content: center;" [ngStyle]="{'color': call_string_color ? 'red' : 'green' }">This Call is {{callstateString}}</h5>
+        </div>
+      </div>
+    <router-outlet ></router-outlet>
+          <!-- partial:partials/_footer.html -->
+          <div class="row"   style="margin-left:30px;padding-top: 50px;">
+            <div fxFlex="30">
+          
+            </div>
+            <div fxFlex="30" *ngIf="diagVisible">
+              <h6 style="color:red"> lora comm: {{lora_comm}} </h6>
+              <h6 style="color:green"> gps comm: {{gps_comm}} </h6>
+              <h6> hard-arm comm: {{hard_arm_comm}} </h6>
+              <br/><br/>
+              <h6 style="color:green"> gps data: {{gps_data}} </h6>
+              <h6 style="color:blue"> lora data: {{lora_data}} </h6>
+              <h6> hard-arm data: {{hard_arm_comm}} </h6>
+            </div>
+          
+            <div fxFlex="30">
+          
+            </div>
+          </div>
+
+</mat-sidenav-content>
+
+
+
+</mat-sidenav-container>

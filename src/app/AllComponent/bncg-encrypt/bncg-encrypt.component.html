@@ -1,0 +1,24 @@
+<div style="margin-top: 100px;">
+    <div class="d-flex justify-content-center h-100 w-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>BN-CG Encryption Key</h3>
+  
+        </div>
+        <div class="card-body">
+          <form [formGroup]="Forms">
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="16 character encryption key" formControlName="key">           
+            </div>
+  
+            <div class="form-group">
+              <input type="submit" value="Save" (click)="FormSubmit()"  [disabled]="!Forms.valid" class="btn float-right login_btn">
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  

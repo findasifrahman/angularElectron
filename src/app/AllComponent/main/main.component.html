@@ -1,0 +1,272 @@
+
+<div class="loading-indicator" *ngIf="!allloaded" >
+    <mat-spinner 
+      diameter="150"></mat-spinner>
+  </div>
+<div class="content-wrapper" style="margin-left: 2em;margin-top: 0.5em !important;padding-top:1em;padding-bottom: 0 !important;margin-bottom: 0 !important;overflow-x: hidden;">
+  <div class="card-body" style="text-align: center;color:blanchedalmond;font-size: large;background-color: seagreen;margin-bottom: 30px;">
+    Voice Settings ({{connecString}})
+  </div> 
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+    <div fxFlex="40"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+      <div class="fs-12" style="justify-content: center">
+        <span class="mr-2" style="font-family: merriweather;color: rebeccapurple;" >Set Current Channel </span>
+      </div>
+      <div class="fs-12">
+        <mat-form-field style="border-width: 1em;border-color: black;width: 100%;">
+          <mat-label>Voice Channel</mat-label>
+          <select matNativeControl [(ngModel)]="channel"  name="channel" >   
+            <option *ngFor="let car of chanel_arr" [value]="car">
+              {{car}}
+            </option>
+          </select>
+
+          <mat-hint>ch</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex="50"  style="padding-left: 0em !important; padding-bottom: 0 !important;padding-top: 20px; ">
+      <div class="fs-12" style="justify-content: center">
+      </div>
+      <div class="fs-12">
+        <button class="form-control btn" style="background-color: seagreen;color: white;height: 50px;" (click)="chnSubmit()">Set Channel </button>
+      </div>
+    </div>
+
+  </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+        <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+            <div class="fs-12" style="justify-content: center;">
+                <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 1 Frequency</span>
+              </div>
+              <div class="fs-12">
+                <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                    <input matInput placeholder="Set Channel 1 Frequency" [(ngModel)]="ch1" type="Text" >
+                </mat-form-field>
+              </div>
+        </div>     
+        <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+            <div class="fs-12" style="justify-content: center;">
+                <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 2 Frequency</span>
+              </div>
+              <div class="fs-12">
+                <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                    <input matInput placeholder="Set Channel 3 Frequency" [(ngModel)]="ch2" type="Text" >
+                </mat-form-field>
+              </div>
+        </div>  
+        <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+            <div class="fs-12" style="justify-content: center;">
+                <span class="mr-2" style="font-family: merriweather;color: black;;" >Set Channel 3 Frequency </span>
+              </div>
+              <div class="fs-12">
+                <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                    <input matInput placeholder="Set Channel 3 Frequency" [(ngModel)]="ch3" type="Text" >
+                </mat-form-field>
+              </div>
+        </div>   
+        <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+            <div class="fs-12" style="justify-content: center">
+                <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 4 Frequency </span>
+              </div>
+              <div class="fs-12">
+                <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                    <input matInput placeholder="Set Channel 4 Frequency" [(ngModel)]="ch4"  type="Text" >
+                </mat-form-field>
+              </div>
+        </div>  
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+      <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+          <div class="fs-12" style="justify-content: center;">
+              <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 5 Frequency</span>
+            </div>
+            <div class="fs-12">
+              <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                  <input matInput placeholder="Set Channel 5 Frequency" [(ngModel)]="ch5" type="Text" >
+              </mat-form-field>
+            </div>
+      </div>     
+      <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+          <div class="fs-12" style="justify-content: center;">
+              <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 6 Frequency</span>
+            </div>
+            <div class="fs-12">
+              <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                  <input matInput placeholder="Set Channel 6 Frequency" [(ngModel)]="ch6" type="Text" >
+              </mat-form-field>
+            </div>
+      </div>  
+      <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+          <div class="fs-12" style="justify-content: center;">
+              <span class="mr-2" style="font-family: merriweather;color: black;;" >Set Channel 7 Frequency </span>
+            </div>
+            <div class="fs-12">
+              <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                  <input matInput placeholder="Set Channel 7 Frequency" [(ngModel)]="ch7" type="Text" >
+              </mat-form-field>
+            </div>
+      </div>   
+      <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+          <div class="fs-12" style="justify-content: center">
+              <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 8 Frequency </span>
+            </div>
+            <div class="fs-12">
+              <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                  <input matInput placeholder="Set Channel 8 Frequency" [(ngModel)]="ch8"  type="Text" >
+              </mat-form-field>
+            </div>
+      </div>  
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 9 Frequency</span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 9 Frequency" [(ngModel)]="ch9" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>     
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 10 Frequency</span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 10 Frequency" [(ngModel)]="ch10" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>  
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;;" >Set Channel 11 Frequency </span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 11 Frequency" [(ngModel)]="ch11" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>   
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 12 Frequency </span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 12 Frequency" [(ngModel)]="ch12"  type="Text" >
+            </mat-form-field>
+          </div>
+    </div>  
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 13 Frequency</span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 13 Frequency" [(ngModel)]="ch13" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>     
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 14 Frequency</span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 14 Frequency" [(ngModel)]="ch14" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>  
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center;">
+            <span class="mr-2" style="font-family: merriweather;color: black;;" >Set Channel 15 Frequency </span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 15 Frequency" [(ngModel)]="ch15" type="Text" >
+            </mat-form-field>
+          </div>
+    </div>   
+    <div fxFlex="24"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+        <div class="fs-12" style="justify-content: center">
+            <span class="mr-2" style="font-family: merriweather;color: black;" >Set Channel 16 Frequency </span>
+          </div>
+          <div class="fs-12">
+            <mat-form-field floatLabel="options.value.floatLabel" style="width: 100%;">
+                <input matInput placeholder="Set Channel 16 Frequency" [(ngModel)]="ch16"  type="Text" >
+            </mat-form-field>
+          </div>
+    </div>  
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px">
+    <div fxFlex="20"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+      <div class="fs-12" style="justify-content: center">
+        <span class="mr-2" style="font-family: merriweather;color: rebeccapurple;" >Set Encryption </span>
+      </div>
+      <div class="fs-12">
+        <mat-form-field style="border-width: 1em;border-color: black;width: 100%;">
+          <mat-label>Encryption Tx</mat-label>
+          <select matNativeControl [(ngModel)]="encryption_tx_val"  name="encryption_tx_val" >   
+            <option *ngFor="let car of encryption_rx" [value]="car.val">
+              {{car.name}}
+            </option>
+          </select>
+
+          <mat-hint>En</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex="20"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+      <div class="fs-12" style="justify-content: center">
+        <span class="mr-2" style="font-family: merriweather;color: rebeccapurple;" >Set Encryption </span>
+      </div>
+      <div class="fs-12">
+        <mat-form-field style="border-width: 1em;border-color: black;width: 100%;">
+          <mat-label>Encryption Rx</mat-label>
+          <select matNativeControl [(ngModel)]="encryption_rx_val"  name="encryption_rx_val" >   
+            <option *ngFor="let car of encryption_rx" [value]="car.val">
+              {{car.name}}
+            </option>
+          </select>
+
+          <mat-hint>En</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex="20"  style="padding-left: 0em !important; padding-bottom: 0 !important; ">
+      <div class="fs-12" style="justify-content: center">
+        <span class="mr-2" style="font-family: merriweather;color: rebeccapurple;" >Set SQ Level </span>
+      </div>
+      <div class="fs-12">
+        <mat-form-field style="border-width: 1em;border-color: black;width: 100%;">
+          <mat-label>SQ Level</mat-label>
+          <select matNativeControl  [(ngModel)]="sqlevel"  name="category" >   
+            <option *ngFor="let car of sq" [value]="car">
+              {{car}}
+            </option>
+          </select>
+
+          <mat-hint>SQ</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex="40"  style="padding-left: 0em !important; padding-bottom: 0 !important;padding-top: 20px; ">
+      <div class="fs-12" style="justify-content: center">
+      </div>
+      <div class="fs-12">
+        <button class="form-control btn" style="background-color: seagreen;color: white;height: 50px;" (click)="formSubmit()">Set Voice </button>
+      </div>
+    </div>
+  </div>
+
+</div>

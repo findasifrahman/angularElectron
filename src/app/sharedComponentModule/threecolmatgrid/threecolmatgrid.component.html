@@ -1,0 +1,13 @@
+<mat-grid-list cols="3" rowHeight="45px" >
+    <mat-grid-tile [colspan]=1 [rowspan]=3>
+      <button mat-fab color="warn" class="btnStyle">
+        <mat-icon color="black">{{iconname}}</mat-icon>
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=2 [rowspan]=1 class="titleStyle" [ngStyle]="{'color':color}">
+      {{title}}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=2 [rowspan]=2 class="descStyle">
+      <span style="padding: 20px">{{description}}</span>
+    </mat-grid-tile>
+  </mat-grid-list>

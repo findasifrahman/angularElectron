@@ -1,0 +1,81 @@
+<div [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006994' : '#006994' }">
+    <div fxLayout="row" fxLayoutGap="10px"  style="padding-left: 20px;margin-left:25px;margin-top: 30px;margin-bottom: 20px;">
+      <div fxFlex="100">
+        <mat-card  style="text-align: center;justify-content: center;background-color: #006994;color:white">
+          <mat-card-title style="color:yellow">
+            {{this.set_channel_id}}
+          </mat-card-title  >
+          <mat-card_subtitle>
+            Current Channel No
+          </mat-card_subtitle>
+        </mat-card>
+      </div>
+
+
+    </div>
+
+    <div class="card" 
+     style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;padding-top: 20px;margin-left: 20px;margin-right: 20px;margin-bottom: 30px;padding-left: 25px;padding-right: 20px;;padding-top: 20px;padding-left: 25px;padding-right: 20px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006994' : '#006994' }">
+      <div class="card-body" style="text-align: center;color: #006994;font-size: x-large;">
+        Data Channel settings
+      </div>
+
+
+    <!--  Text channel settings  -->
+    <div class="card" style="margin-top:20px;border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;padding-top: 20px;margin-left: 20px;margin-right: 20px;margin-bottom: 30px;padding-left: 25px;padding-right: 20px;" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black','color': backcol == 'p' ? '#006994' : '#006994' }">
+
+      <h4 style="text-align: center;padding-top:20px;"> Select Data Channel</h4>
+      <div fxLayout="row" class="mat-elavation-z4"  fxLayoutGap="10px" style="padding-left:20px;margin-top: 25px;margin-bottom: 25px;">
+        
+        <div fxFlex="80" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+          <h5 style="text-align: center;padding-top:20px;">BN Channel</h5>
+          <div fxLayout="row" style="padding-bottom:20px;margin-left:20px">
+          
+            <div fxFlex="20" style="align-items: center;text-align: center;">
+              <button mat-fab  [ngStyle]="{'backgroundColor': selectchancol1 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(1)">D-1</button>
+            </div>
+         
+              <div fxFlex="20" style="align-items: center;text-align: center;">
+                <button mat-fab [ngStyle]="{'backgroundColor': selectchancol2 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(2)">D-2</button>
+              </div>
+    
+       
+              <div fxFlex="20" style="align-items: center;text-align: center;">
+                <button mat-fab [ngStyle]="{'backgroundColor': selectchancol3 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(3)">D-3</button>
+              </div>
+            
+          
+              <div fxFlex="20" style="align-items: center;text-align: center;">
+                <button mat-fab [ngStyle]="{'backgroundColor': selectchancol4 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(4)">D-4</button>
+              </div>
+         
+       
+              <div fxFlex="20" style="align-items: center;text-align: center;">
+                <button mat-fab [ngStyle]="{'backgroundColor': selectchancol5 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(5)">D-5</button>
+              </div>
+         
+          </div>
+        </div>
+
+
+        <div fxFlex="20" style="border-radius: 5px;border-width: 1px;border-color: navy;border-style:solid;">
+          <h5 style="text-align: center;padding-top:20px;">BN-CG</h5>
+          <div fxLayout="row" style="padding-bottom:20px;margin-left:20px">
+          
+            <div fxFlex="100" style="align-items: center;text-align: center;">
+              <button mat-fab [ngStyle]="{'backgroundColor': selectchancol6 == 'p' ? 'seagreen' : 'yellow' }" (click)="text_channelChangeSubmit(6)">D-6</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<ngx-spinner></ngx-spinner>

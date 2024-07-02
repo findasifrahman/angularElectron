@@ -1,0 +1,51 @@
+
+
+<div style="margin-top: 100px;">
+  <div class="d-flex justify-content-center h-100 w-100">
+    <div class="card">
+
+
+      <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field fxFlex="40%">
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">
+          <mat-table [dataSource]="AllElement" multiTemplateDataRows class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="username">
+              <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+              <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.username}} </mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="buttons">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let AllElement" (click)="$event.stopPropagation()">
+                <button mat-button color="warn" (click)="onDelete(AllElement.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-button color="warn" (click)="onUpdate(AllElement.id)">
+                  <mat-icon>update</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+      
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row style="background-color:black" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
+          </mat-table>
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+        </div>
+      </div>
+  </div>
+ </div>
+</div>
+  <br />
+  <br />
+  
+  
+  
+  
+  

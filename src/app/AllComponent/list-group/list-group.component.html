@@ -1,0 +1,57 @@
+
+<div class="card" style="margin-top: 20px;margin-left: 45px;background-color: #006994;">
+  <div class="card-body" style="text-align: center;color:blanchedalmond;font-size: x-large;">
+    List of Groups
+  </div>
+</div>
+
+<div fxLayout fxLayoutAlign="center center" style="margin-top: 20px;margin-left: 45px;">
+  <mat-form-field fxFlex="30%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Title Filter">
+  </mat-form-field>
+
+</div>
+
+<div class="row" style="margin-top: 20px;margin-left: 45px;">
+  <div class="col-md-12">
+    <mat-table [dataSource]="AllElement" multiTemplateDataRows class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="gr_name">
+        <mat-header-cell *matHeaderCellDef> Group name </mat-header-cell>
+        <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.gr_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="gr_number">
+        <mat-header-cell *matHeaderCellDef> Group number </mat-header-cell>
+        <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.gr_number}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="members">
+        <mat-header-cell *matHeaderCellDef> Members </mat-header-cell>
+        <mat-cell style="color:whitesmoke" *matCellDef="let Element"> {{Element.members}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let AllElement" (click)="$event.stopPropagation()">
+          <button mat-button color="#ffffff" (click)="onDelete(AllElement.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        
+          <button mat-button color="#ffffff" (click)="onUpdate(AllElement.id)">
+            <mat-icon>update</mat-icon>
+          </button>
+        
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row style="background-color: #006994;" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+  </div>
+</div>
+
+<br />
+<br />
+
+

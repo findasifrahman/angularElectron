@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="d-flex justify-content-center h-100 w-100">
+
+      <div class="row"  style="margin-top: 20px;">
+          <div class="mb10" fxFlex="64" style="border-width: 2px;border-color: green;" >
+              <div class="bd-highlight" style="margin-top: 8px !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;border-width: 2px;border-color: green;">
+                <mat-form-field class="example-full-width" style="margin-top: 0 !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;"  appearance="outline">
+                  <input matInput style="margin-top: 0 !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;" placeholder="Enter Date & Time"
+                  [style.width]="'295px'"
+                  [(ngModel)]="dateTimeRange"
+                  [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1"
+                  > 
+                  <owl-date-time   startView="month"  #dtRange1 ></owl-date-time>
+                </mat-form-field>
+
+              </div>
+          </div>
+        <div class="mb10" style="margin-top: 8px;" fxFlex="36" >
+          <button mat-raised-button (click)="triggerDelete();" style="margin-top:8px;background-color:#2F4F4F;color:aliceblue;font-weight:bold;margin-bottom:1px;padding:10px;width: 120px!important;min-width: unset!important;"  >Delete</button>           
+
+        </div>
+      </div>
+  </div>
+</div>
+
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,22 @@
+
+
+mgl-map {
+    height: 680px;
+    width: 100%;
+}
+match-parent{
+  height: 100%;
+  width: 100%;
+}
+.marker {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+} 
+
+#mapa { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+.example-spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,10 @@
+<mat-form-field class="example-full-width"  appearance="outline" style="margin-top: 0 !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;">
+  <mat-select  [formControl]="siteCtrl" (selectionChange)="cliidchanged($event)" placeholder="{{formControlnam}}" #singleSelect>
+    <mat-option>
+      <ngx-mat-select-search [formControl]="siteFilterCtrl"></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngFor="let bank of filteredSites | async" [value]="bank">
+      {{bank[formControlnam]}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

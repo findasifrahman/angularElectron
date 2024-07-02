@@ -1,0 +1,13 @@
+
+
+<h2 style="text-align: center;color: seagreen;">Enter Password</h2>
+
+<div mat-dialog-content align="center">
+   <mat-form-field>
+       <input matInput class="form-control" type="password" [(ngModel)]="dpass" />
+   </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="warn" [mat-dialog-close]="dpass" cdkFocusInitial>Enter</button>
+    <button mat-raised-button color="accent" (click)="onNoClick()">No</button>
+  </div>

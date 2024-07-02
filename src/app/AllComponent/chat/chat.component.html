@@ -1,0 +1,212 @@
+
+
+  
+  <div class="container h-50" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+
+    <div class="row justify-content-center h-100" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+        <div class="col-md-3 card  contacts_card" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+            <!--
+            <div class="input-group" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+              <input type="text" placeholder="Search.." name="" class="form-control search">
+              <div class="input-group-prepend">
+                <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+              </div>
+            </div>
+             -->
+            <div class="card-body contacts_body" >
+                  <ul class="contacts" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+                    <li *ngFor="let c of rcvrlist; index as i" (click)="selcetship(c)" class="c"  [ngClass]="{'green':c.isactive}" style="margin-bottom: 0 !important;margin-top: 0 !important;padding-bottom: 0 !important;padding-top: 6px !important;" >
+                      <div 
+                       class="row d-flex bd-highlight" fxLayout.xs="column"  style="border-bottom: 1px solid rgba(220, 0, 0, 0.4);">
+                        <div fxFlex="100" style="padding-left: 5px;" >
+                          <div fxFlex="85" matBadge={{c.new_msg_no}} [matBadgeHidden]="c.bg_hidden" matBadgePosition="after" matBadgeSize="small" matBadgeColor="warn"  class="d-flex bd-highlight" style="margin-bottom: 0 !important;margin-top: 0 !important;padding-bottom: 0 !important;padding-top: 0 !important;" >
+                            <!-- "'green':activeFolder"
+                            <div class="img_cont">
+                              <img src="assets/Bijoy-50_2.jpg" class="rounded-circle user_img">
+                              <span class="online_icon" ></span>
+                            </div>
+                          -->
+                          
+                                
+                                  <div class="user_info col-md-12 col-lg-12" (contextmenu)="onpinContextMenu($event, c)" style="margin-bottom: 0 !important;margin-top: 0 !important;padding-bottom: 0 !important;padding-top: 0 !important;">
+                                    <span style="color: rgba(255,255,255,0.8);font-family: roboto;font-size: 16px;color:#8A2BE2; ">{{c.ship}} </span>
+                                    <span 
+                                    style="font-family: roboto-black;color:red;font-size:14px;float:right" *ngIf="!c.state">{{c.status}} </span>
+                                    <span style="font-family: roboto-black;color:green;font-size:14px;float: right" *ngIf="c.state">{{c.status}}</span>
+                                  </div>
+                                  
+                            </div>
+                            <div fxFlex="15" >
+                              <mat-icon style="color: darkblue;cursor:pointer;padding-left: 5px;" *ngIf="c.pin">push_pin</mat-icon>
+                         
+                            </div>
+                          </div>
+                      </div>
+                    </li>
+      
+                </ul>
+            </div>
+      </div>
+      <!--context menu for pin
+      -->
+      <!---->
+      <div style="visibility: hidden; position: fixed"
+          [style.left]="pincontextMenuPosition.x"
+          [style.top]="pincontextMenuPosition.y"
+          [matMenuTriggerFor]="pincontextMenu">
+      </div>
+      <mat-menu #pincontextMenu="matMenu">
+        <ng-template matMenuContent let-item="pinitem">
+          <button mat-menu-item (click)="pinContextMenu(pinitem)">Pin</button>
+          <button mat-menu-item (click)="UnpinContextMenu(pinitem)">Unpin</button>
+        </ng-template>
+      </mat-menu>
+      <!---->
+      <div class="col-md-9 col-xl-9 chat">
+        <div class="card">
+          <div class="card-header msg_head" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }">
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="assets/Bijoy-50_2.png" class="rounded-circle user_img">
+                <span class="online_icon"></span>
+              </div>
+              <div class="user_info">
+                <span style="color:#8A2BE2;font-size: large;font-weight: bold">User: {{my_dev_name}} </span>
+                <!--
+                <p style="font-family:roboto-black;color:#2F4F4F;margin-bottom: 2px;padding-bottom: 0 !important;">{{connectString}}</p>
+                -->
+                <p style="font-family: roboto-black;font-size: medium;color: rgba(80, 41, 41, 0.8);margin-top: 1px;padding-top: 0 !important;">{{chat_between}}</p>
+              </div>
+
+            </div>
+            <span id="action_menu_btn" ><i class="fas fa-ellipsis-v" style="color:red"></i></span>
+            <div class="action_menu">
+              <ul>
+                <li ><i class="fas fa-user-circle"></i> Settings</li>
+                <li ><i class="fas fa-users"></i> Map</li>
+                
+              </ul>
+            </div>
+          </div>
+  
+          <div class="card-body msg_card_body"    [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }" #someVar (scroll)="onScroll()">
+            <div *ngFor="let c of tmp_txtlist; let last = last" >
+                <div class="d-flex justify-content-start mb-4" *ngIf="c.mleft">
+ 
+                  <div class="msg_cotainer" (contextmenu)="onContextMenu($event, c)"  style="background-color: tomato;color:whitesmoke" >
+                    <span style="font-size:large;color:yellow">{{c.sender}}</span>
+                    <br/> 
+                    <p style="font-size:large;display: block;width:95%;max-width: 95% !important;">{{c.text}}</p> 
+                   
+                    <span class="msg_time" style="font-size: medium;">{{c.showtime}}</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4"  *ngIf="c.mright">
+                  <div class="msg_cotainer_send" style="background-color: #009dc4; color: whitesmoke;">
+                    <p style="font-size: large;display: block;max-width: 95% !important;width: 95%;">{{c.text}}</p>
+                    <span class="msg_time_send"  style="font-size: medium">{{c.showtime}} 
+                      <mat-icon style="font-size: 12px; color:white;text-align:end;" *ngIf="c.sent">done</mat-icon>
+                      <mat-icon style="font-size: 12px; color:white;text-align:end" *ngIf="c.allOnlineSent">done</mat-icon>
+                    </span>
+                  </div>
+
+                </div>
+                {{last ? scrollToBottom() : ''}}
+            </div>
+  
+          </div>
+  
+          <!---->
+          <div style="visibility: hidden; position: fixed"
+              [style.left]="contextMenuPosition.x"
+              [style.top]="contextMenuPosition.y"
+              [matMenuTriggerFor]="contextMenu">
+          </div>
+          <mat-menu #contextMenu="matMenu">
+            <ng-template matMenuContent let-item="item">
+              <button mat-menu-item (click)="onContextMenuAction1(item)">Reply</button>
+            </ng-template>
+          </mat-menu>
+          <!--  end of chat -->
+          <div class="card-footer" [ngStyle]="{'backgroundColor': backcol == 'p' ? 'white' : 'black' }" >
+            <div class="input-group" >
+              <div class="input-group-append" >
+                <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+              </div>
+              <textarea style="font-size: large;" (keydown.enter)="onkeydown($event)"  (keyup.enter)="FormSubmit()" [(ngModel)]="inputText" (ngModelChange)="inputTextOnChange()" name="" class="form-control type_msg" [ngStyle]="{'color': backcol == 'p' ? 'white' : 'green' }" placeholder="Type your message..."></textarea>
+              <div  class="input-group-append">
+                <span class="input-group-text send_btn" (click)="FormSubmit()"><i class="fas fa-location-arrow"></i></span>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+        <p style="color: black;font-size: large;">{{inputtext_length}}</p>
+  
+        <h4 style="margin-top: 20px;text-align: center;font-weight:bold;color:#041615;text-decoration:underline;margin-top:20px;">Operational Communication Log</h4>
+        <div class="row"  style="margin-top: 1px;">
+
+          <div class="mb10" fxFlex="32" style="border-width: 2px;border-color: green;" >
+              <div class="bd-highlight" style="margin-top: 8px !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;border-width: 2px;border-color: green;">
+                <mat-form-field class="example-full-width" style="margin-top: 0 !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;"  appearance="outline">
+                  <input matInput style="margin-top: 0 !important;padding-top: 0 !important;margin-bottom: 0 !important;padding-bottom: 0 !important;" placeholder="Enter From Date & Time"
+                  [style.width]="'295px'"
+                  [(ngModel)]="dateTimeRange"
+                  [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1"
+                  > 
+                  <owl-date-time   startView="month"  #dtRange1 ></owl-date-time>
+                </mat-form-field>
+      
+              </div>
+          </div>
+          <div class="mb10" fxFlex="32" >
+            <div class="bd-highlight" style="margin-top: 8px !important;padding-top: 0 !important;">
+              <mat-form-field class="example-full-width"  appearance="outline">
+                <input matInput placeholder="Enter To Date & Time:"
+                  [style.width]="'295px'"
+                  [(ngModel)]="dateTimeRange2"
+                  [owlDateTimeTrigger]="dtRange2" [owlDateTime]="dtRange2"
+                >
+                <owl-date-time  startView="month"  #dtRange2></owl-date-time>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="mb10" style="margin-top: 8px;" fxFlex="36" >
+            <button mat-raised-button (click)="triggerPrint();" style="margin-top:8px;background-color:#2F4F4F;color:aliceblue;font-weight:bold;margin-bottom:1px;padding:10px;width: 120px!important;min-width: unset!important;"  >Print</button>           
+            <button #printt printTitle="Operational Communication" hidden="true" [useExistingCss]="true" printSectionId="printVar" ngxPrint></button>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div class="col-md-9 col-xl-9 chat" id="printVar"  #printVar  style="margin-top:700px" hidden="true" >
+  <h3 style="text-align: center;">Operational Communication Log </h3>
+  <h4 style="text-align: center;">Unit: {{my_dev_name}}</h4>
+  <h4 style="text-align: center;text-decoration: underline;">{{to_date}} To {{from_date}}</h4>
+  <div>
+    <div class="card-body" style="overflow-y: hidden;overflow-x: hidden;height: auto;"  >
+      <div *ngFor="let c of print_txtlist; index as i" >
+          <div class="d-flex justify-content-start" *ngIf="c.mleft">
+
+            <div class="msg_cotainer" style="background-color: white;color:black;width: 95% !important;" >
+              <span style="font-size:large;display: block">{{c.sender}} : {{c.showtime}} : {{c.text}} </span>         
+            </div>
+          </div>
+          <div class="d-flex justify-content-end"  *ngIf="c.mright">
+            <div class="msg_cotainer_send" style="background-color:white;color:black;width:95% !important">
+              <span class="msg_time_send"  style="font-size: medium;font-weight:600;">{{my_dev_name}}: {{c.showtime}} : {{c.text}} </span>
+
+            </div>
+
+          </div>
+
+          <hr/>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>
